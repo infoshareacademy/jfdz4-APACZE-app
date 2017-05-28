@@ -31,10 +31,13 @@ class LoginForm extends React.Component {
             </Col>
           </FormGroup>
 
-          <FormGroup>
-            <Col xsOffset={2} smOffset={3} xs={8}>
-              <Button type="submit">
+          <FormGroup controlId="formHorizontalLogIn">
+            <Col xsOffset={2} smOffset={3} xs={3}>
+              <Button bsStyle="primary" type="submit">
                 Zaloguj
+              </Button>
+              <Button bsStyle="danger" type="submit">
+                Pomiń logowanie
               </Button>
             </Col>
           </FormGroup>
