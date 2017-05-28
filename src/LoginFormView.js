@@ -1,47 +1,47 @@
 import React from 'react'
-import {Form, FormGroup, FormControl, Col, Checkbox, ControlLabel, Button } from 'react-bootstrap'
+import {Form, FormGroup, FormControl, Col, Checkbox, ControlLabel, Button} from 'react-bootstrap'
 
-class LoginForm extends React.Component{
-    render() {
+class LoginForm extends React.Component {
+  render() {
     return (
 
       <div>
-      <Form horizontal  >
-          <FormGroup controlId="formHorizontalEmail" >
-              <Col componentClass={ControlLabel} sm={2}>
-                  Email
-              </Col>
-              <Col sm={10}>
-                  <FormControl type="email" placeholder="Email"/>
-              </Col>
+        <Form horizontal>
+          <FormGroup controlId="formHorizontalEmail">
+            <Col componentClass={ControlLabel} smOffset={1} xs={2}>
+              E-mail
+            </Col>
+            <Col xs={8} sm={7}>
+              <FormControl type="email" placeholder="E-mail"/>
+            </Col>
           </FormGroup>
 
           <FormGroup controlId="formHorizontalPassword">
-              <Col componentClass={ControlLabel} sm={2}>
-                  Password
-              </Col>
-              <Col sm={10}>
-                  <FormControl type="password" placeholder="Password"/>
-              </Col>
+            <Col componentClass={ControlLabel} smOffset={1} xs={2}>
+              Hasło
+            </Col>
+            <Col xs={8} sm={7}>
+              <FormControl type="password" placeholder="Hasło"/>
+            </Col>
           </FormGroup>
 
           <FormGroup>
-              <Col smOffset={2} sm={10}>
-                  <Checkbox>Remember me</Checkbox>
-              </Col>
+            <Col xsOffset={2} smOffset={3} xs={8}>
+              <Checkbox>Zapamiętaj mnie</Checkbox>
+            </Col>
           </FormGroup>
 
           <FormGroup>
-              <Col smOffset={2} sm={10}>
-                  <Button type="submit">
-                      Sign in
-                  </Button>
-              </Col>
+            <Col xsOffset={2} smOffset={3} xs={8}>
+              <Button type="submit">
+                Zaloguj
+              </Button>
+            </Col>
           </FormGroup>
-      </Form>
+        </Form>
       </div>
     )
-}
+  }
 }
 
 export default LoginForm
