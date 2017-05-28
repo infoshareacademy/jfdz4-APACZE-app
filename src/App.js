@@ -1,11 +1,14 @@
-import React, { Component } from 'react';
-import LoginForm from './LoginFormView'
-
+import React, { Component } from 'react'
+import LoginForm from './components/LoginFormView'
+import Users from './components/Users'
 
 class App extends Component {
   render() {
     return (
-          <LoginForm/>
+      <div>
+        <LoginForm/>
+        <Users/>
+      </div>
     );
   }
 }
