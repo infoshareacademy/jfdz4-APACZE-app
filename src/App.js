@@ -5,7 +5,7 @@ import SearchForm from './SearchForm'
 class App extends Component {
   render() {
     return (
-          <LoginForm/>
+      <LoginForm/>
       <SearchForm/>
     );
   }

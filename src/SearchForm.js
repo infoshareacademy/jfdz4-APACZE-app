@@ -5,27 +5,27 @@ import {
   Col,
   Button,
   InputGroup,
-    Radio
+  Radio
 } from 'react-bootstrap'
 
 class SearchForm extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            date: "1990-06-05",
-            format: "YYYY-MM-DD",
-            mode: "date"
-        };
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      date: "1990-06-05",
+      format: "YYYY-MM-DD",
+      mode: "date"
+    };
+  }
 
-    handleDateChange = (newDate) => {
-        console.log("newDate", newDate);
-        return this.setState({date: newDate});
-    }
+  handleDateChange = (newDate) => {
+    console.log("newDate", newDate);
+    return this.setState({date: newDate});
+  }
 
   render() {
-      var DateTimeField = require('react-bootstrap-datetimepicker');
-      return (
+    var DateTimeField = require('react-bootstrap-datetimepicker');
+    return (
       <div>
         <Col xsOffset={4} xs={4}>
           <form>
@@ -42,26 +42,26 @@ class SearchForm extends React.Component {
               </InputGroup>
             </FormGroup>
           </form>
-            <p>Data</p>
-            <DateTimeField
-                mode="date"
-                inputFormat="DD-MM-YYYY"
-                onChange={this.handleDateChange}
-            />
-            <p>Godzina</p>
-            <DateTimeField
-                mode="time"
-            />
-            <FormGroup>
-                <Radio name="radioGroup" inline>
-                    Odjazd
-                </Radio>
-                {' '}
-                <Radio name="radioGroup" inline>
-                    Przyjazd
-                </Radio>
-            </FormGroup>
-            <Button type="submit">
+          <p>Data</p>
+          <DateTimeField
+            mode="date"
+            inputFormat="DD-MM-YYYY"
+            onChange={this.handleDateChange}
+          />
+          <p>Godzina</p>
+          <DateTimeField
+            mode="time"
+          />
+          <FormGroup>
+            <Radio name="radioGroup" inline>
+              Odjazd
+            </Radio>
+            {' '}
+            <Radio name="radioGroup" inline>
+              Przyjazd
+            </Radio>
+          </FormGroup>
+          <Button type="submit">
             Szukaj połączenia
           </Button>
         </Col>
