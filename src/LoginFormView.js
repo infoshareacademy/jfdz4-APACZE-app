@@ -1,10 +1,10 @@
 import React from 'react'
 import {Form, FormGroup, FormControl, Col, Checkbox, ControlLabel, Button} from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 class LoginForm extends React.Component {
   render() {
     return (
-
       <div>
         <Form horizontal>
           <FormGroup controlId="formHorizontalEmail">
@@ -34,7 +34,9 @@ class LoginForm extends React.Component {
           <FormGroup>
             <Col xsOffset={2} smOffset={3} xs={8}>
               <Button type="submit">
-                Zaloguj
+                <Link to={'/search'}>
+                  Zaloguj
+                </Link>
               </Button>
             </Col>
           </FormGroup>

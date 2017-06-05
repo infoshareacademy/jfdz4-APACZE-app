@@ -7,6 +7,7 @@ import {
   InputGroup,
   Radio
 } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 class SearchForm extends React.Component {
   constructor(props) {
@@ -65,6 +66,11 @@ class SearchForm extends React.Component {
             Szukaj połączenia
           </Button>
         </Col>
+        <Button type="submit">
+          <Link to={'/'}>
+            Powrót do logowania
+          </Link>
+        </Button>
       </div>
     )
   }

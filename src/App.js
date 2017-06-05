@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom'
+import {
+  Grid
+} from 'react-bootstrap'
 import LoginForm from './LoginFormView'
 import SearchForm from './SearchForm'
 
-class App extends Component {
-  render() {
-    return (
-      <LoginForm/>
-      <SearchForm/>
-    );
-  }
-}
+const App = () => (
+      <Router>
+        <Grid>
+        <Route exact path="/" component={LoginForm}/>
+        <Route path="/search" component={SearchForm}/>
+        </Grid>
+      </Router>
+)
 
 export default App;
