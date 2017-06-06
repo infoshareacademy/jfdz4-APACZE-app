@@ -40,6 +40,7 @@ class LoginForm extends React.Component {
               </Button>
             </Col>
           </FormGroup>
+
         </Form>
       </div>
     )
