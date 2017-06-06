@@ -42,7 +42,7 @@ export default connect(
               <ul>
                 {
                   this.props.users.data.map(
-                    user => <li key={user.id}>{user.name}</li>
+                    user => <li key={user.id}>{user.email}</li>
                   )
                 }
               </ul> : null
