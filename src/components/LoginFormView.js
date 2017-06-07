@@ -1,5 +1,6 @@
 import React from 'react'
 import {Form, FormGroup, FormControl, Col, Checkbox, ControlLabel, Button} from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 class LoginForm extends React.Component {
   render() {
@@ -31,13 +32,12 @@ class LoginForm extends React.Component {
             </Col>
           </FormGroup>
 
-          <FormGroup controlId="formHorizontalLogIn">
-            <Col xsOffset={2} smOffset={3} xs={3}>
-              <Button bsStyle="primary" type="submit">
-                Zaloguj
-              </Button>
-              <Button bsStyle="danger" type="submit">
-                Pomiń logowanie
+          <FormGroup>
+            <Col xsOffset={2} smOffset={3} xs={8}>
+              <Button type="submit">
+                <Link to={'/search'}>
+                  Zaloguj
+                </Link>
               </Button>
             </Col>
           </FormGroup>

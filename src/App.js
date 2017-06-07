@@ -1,16 +1,22 @@
-import React, { Component } from 'react'
-import LoginForm from './components/LoginFormView'
+import React, { Component } from 'react';
+import {
+  BrowserRouter as Router,
+  Route
+} from 'react-router-dom'
+import {
+  Grid
+} from 'react-bootstrap'
+import LoginForm from './LoginFormView'
+import SearchForm from './SearchForm'
 import Users from './components/Users'
 
-class App extends Component {
-  render() {
-    return (
-      <div>
-        <LoginForm/>
-        <Users/>
-      </div>
-    );
-  }
-}
+const App = () => (
+      <Router>
+        <Grid>
+        <Route exact path="/" component={LoginForm}/>
+        <Route path="/search" component={SearchForm}/>
+        </Grid>
+      </Router>
+)
 
 export default App;
