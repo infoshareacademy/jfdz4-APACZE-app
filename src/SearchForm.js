@@ -63,11 +63,13 @@ class SearchForm extends React.Component {
             </Radio>
           </FormGroup>
           <Button type="submit">
+            <Link to={'/result'}>
             Szukaj połączenia
+            </Link>
           </Button>
         </Col>
         <Button type="submit">
-          <Link to={'/'}>
+          <Link to={''}>
             Powrót do logowania
           </Link>
         </Button>

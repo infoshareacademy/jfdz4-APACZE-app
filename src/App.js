@@ -8,12 +8,14 @@ import {
 } from 'react-bootstrap'
 import LoginForm from './LoginFormView'
 import SearchForm from './SearchForm'
+import SearchResult from './SearchResult'
 
 const App = () => (
       <Router>
         <Grid>
         <Route exact path="/" component={LoginForm}/>
         <Route path="/search" component={SearchForm}/>
+        <Route path="/result" component={SearchResult}/>
         </Grid>
       </Router>
 )
