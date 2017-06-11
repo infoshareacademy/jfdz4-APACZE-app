@@ -19,13 +19,13 @@ class SearchResult extends React.Component {
                         <FormGroup >
                             <InputGroup >
                                 <InputGroup.Addon>A</InputGroup.Addon>
-                                <FormControl type="text"  disabled/>
+                                <FormControl type="text" value={przystanek_a} disabled/>
                             </InputGroup>
                         </FormGroup>
                         <FormGroup>
                             <InputGroup>
                                 <InputGroup.Addon>B</InputGroup.Addon>
-                                <FormControl type="text" placeholder="Przystanek końcowy" />
+                                <FormControl type="text" value={przystanek_b} disabled/>
                             </InputGroup>
                         </FormGroup>
                     </form>
