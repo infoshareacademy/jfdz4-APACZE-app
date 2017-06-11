@@ -48,14 +48,23 @@ class SearchForm extends React.Component {
             <FormGroup >
               <InputGroup>
                 <InputGroup.Addon>A</InputGroup.Addon>
-                <FormControl type="text" placeholder="Przystanek początkowy" />
+                <FormControl
+                  type="text"
+                  placeholder="Przystanek początkowy"
+                  value={this.state.busStopName}
+                  onChange={event => this.setState({ busStopName: event.target.value })}
+                />
               </InputGroup>
             </FormGroup>
             <ul>
               {
                 this.state.busStops === null ?
                   'No bus stops' :
-                  this.state.busStops.map(
+                  this.state.busStops.filter(
+                    busStop => (
+                      busStop.name.toLowerCase().includes(this.state.busStopName.toLowerCase())
+                    )
+                  ).map(
                     busStop => (
                       <li key={busStop.id}>{busStop.name}</li>
                     )
