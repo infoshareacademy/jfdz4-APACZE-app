@@ -19,6 +19,8 @@ const App = () => (
         <Route path="/search" component={SearchForm}/>
         <Route path="/register" component={RegistrationForm}/>
         <Route path="/users" component={Users}/>
+          <Route path="/successForm" component={RegistrationSuccessForm}/>          
+          
         </Grid>
       </Router>
 )

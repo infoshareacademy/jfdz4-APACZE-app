@@ -64,7 +64,7 @@ class RegistrationForm extends React.Component {
     firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
       //po then strona z informacją o sukcesie
       .then(
-        () => this.props.history.push('/')
+        () => this.props.history.push('/successForm')
       )
       .catch(function (error) {
       // Handle Errors here.
