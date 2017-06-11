@@ -2,7 +2,8 @@ import React from 'react'
 import {Form, FormGroup, FormControl, Col, ControlLabel, Button} from 'react-bootstrap'
 import Schema from 'form-schema-validation'
 //import { Form, TextField, CheckboxField, SubmitField } from 'react-components-form'
-import { Link } from 'react-router-dom'
+import {Link} from 'react-router-dom'
+import firebase from 'firebase'
 
 const emailValidator = () => ({
   validator(value){
@@ -16,11 +17,11 @@ const emailValidator = () => ({
 });
 
 const registrationSchema = new Schema({
-  name:{
+  name: {
     type: String,
     required: true
   },
-  email:{
+  email: {
     type: String,
     required: true,
     validators: [emailValidator()]
@@ -31,62 +32,104 @@ const registrationSchema = new Schema({
   }
 });
 
-const RegistrationForm  = () => (
-  <Form horizontal
-    schema={registrationSchema}
-    onSubmit={data => console.log(data)}
-    onError={(errors, data) => console.log('error', errors, data)}
-  >
+class RegistrationForm extends React.Component {
 
-    <FormGroup>
-      <Col smOffset={1} xs={2}>
-      </Col>
-      <Col xs={8} sm={7}>
-        <h4>Rejestracja konta</h4>
-      </Col>
-    </FormGroup>
-    <FormGroup controlId="formHorizontalName">
-      <Col componentClass={ControlLabel} smOffset={1} xs={2}>
-        Nazwa konta
-      </Col>
-      <Col xs={8} sm={7}>
-        <FormControl type="name" placeholder="Nazwa"/>
-      </Col>
-    </FormGroup>
+  constructor(props) {
+    super(props);
+    this.state = {
+      name: '',
+      email: '',
+      password: ''
+    }
+  }
 
-    <FormGroup controlId="formHorizontalEmail">
-      <Col componentClass={ControlLabel} smOffset={1} xs={2}>
-        E-mail
-      </Col>
-      <Col xs={8} sm={7}>
-        <FormControl type="email" placeholder="E-mail"/>
-      </Col>
-    </FormGroup>
+  handleChange = (e) => {
+    let newState = {};
 
-    <FormGroup controlId="formHorizontalPassword">
-      <Col componentClass={ControlLabel} smOffset={1} xs={2}>
-        Hasło
-      </Col>
-      <Col xs={8} sm={7}>
-        <FormControl type="password" placeholder="Hasło"/>
-      </Col>
-    </FormGroup>
+    newState[e.target.name] = e.target.value;
 
-    <FormGroup>
-      <Col xsOffset={2} smOffset={3} xs={8}>
-        <Button type="submit">
-          <Link to={'/register'}>
-            Zarejestruj
-          </Link>
-        </Button>
-        <Button type="submit">
-          <Link to={'/'}>
-            Powrót do logowania
-          </Link>
-        </Button>
-      </Col>
-    </FormGroup>
-  </Form>
-);
+    this.setState(newState);
+  };
 
+  handleSubmit = (e, message) => {
+    e.preventDefault();
+
+    console.log(this.state)
+
+    //tutaj zapis w firebase
+    firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch(function (error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // ...
+    });
+
+
+    this.setState({
+      name: '',
+      email: '',
+      password: ''
+    });
+  };
+
+  render() {
+    return (
+      <Form horizontal
+        //schema={registrationSchema}
+            onSubmit={this.handleSubmit}
+            onError={(errors, data) => console.log('error', errors, data)}
+      >
+
+        <FormGroup>
+          <Col smOffset={1} xs={2}>
+          </Col>
+          <Col xs={8} sm={7}>
+            <h4>Rejestracja konta</h4>
+          </Col>
+        </FormGroup>
+        <FormGroup controlId="formHorizontalName">
+          <Col componentClass={ControlLabel} smOffset={1} xs={2}>
+            Nazwa konta
+          </Col>
+          <Col xs={8} sm={7}>
+            <FormControl type="name" placeholder="Nazwa" name='name' onChange={this.handleChange}/>
+          </Col>
+        </FormGroup>
+
+        <FormGroup controlId="formHorizontalEmail">
+          <Col componentClass={ControlLabel} smOffset={1} xs={2}>
+            E-mail
+          </Col>
+          <Col xs={8} sm={7}>
+            <FormControl type="email" placeholder="E-mail" name='email' onChange={this.handleChange}/>
+          </Col>
+        </FormGroup>
+
+        <FormGroup controlId="formHorizontalPassword">
+          <Col componentClass={ControlLabel} smOffset={1} xs={2}>
+            Hasło
+          </Col>
+          <Col xs={8} sm={7}>
+            <FormControl type="password" placeholder="Hasło" name='password' onChange={this.handleChange}/>
+          </Col>
+        </FormGroup>
+
+        <FormGroup>
+          <Col xsOffset={2} smOffset={3} xs={8}>
+            <Button type="submit">
+              Zarejestruj
+            </Button>
+            <Button>
+              <Link to={'/'}>
+                Powrót do logowania
+              </Link>
+            </Button>
+          </Col>
+        </FormGroup>
+      </Form>
+    )
+  }
+
+
+}
 export default RegistrationForm
