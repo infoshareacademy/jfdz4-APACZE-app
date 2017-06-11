@@ -1,7 +1,6 @@
 import React from 'react'
 import {Form, FormGroup, FormControl, Col, ControlLabel, Button} from 'react-bootstrap'
 import Schema from 'form-schema-validation'
-//import { Form, TextField, CheckboxField, SubmitField } from 'react-components-form'
 import {Link} from 'react-router-dom'
 import firebase from 'firebase'
 
@@ -57,7 +56,10 @@ class RegistrationForm extends React.Component {
     console.log(this.state)
 
     //tutaj zapis w firebase
-    firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password).catch(function (error) {
+    firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
+      //po then strona z informacją o sukcesie
+      .then()
+      .catch(function (error) {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
