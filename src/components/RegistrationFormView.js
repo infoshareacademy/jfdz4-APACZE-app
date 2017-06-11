@@ -3,6 +3,11 @@ import {Form, FormGroup, FormControl, Col, ControlLabel, Button} from 'react-boo
 import Schema from 'form-schema-validation'
 import {Link} from 'react-router-dom'
 import firebase from 'firebase'
+// import RegistrationSuccessForm from './RegistrationSuccessFormView'
+
+const successForm = () => ({
+
+})
 
 const emailValidator = () => ({
   validator(value){
@@ -58,7 +63,9 @@ class RegistrationForm extends React.Component {
     //tutaj zapis w firebase
     firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
       //po then strona z informacją o sukcesie
-      .then()
+      .then(
+        () => this.props.history.push('/')
+      )
       .catch(function (error) {
       // Handle Errors here.
       var errorCode = error.code;
