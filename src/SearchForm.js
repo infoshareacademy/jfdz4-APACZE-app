@@ -5,7 +5,9 @@ import {
   Col,
   Button,
   InputGroup,
-  Radio
+  Radio,
+  ListGroup,
+  ListGroupItem
 } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
@@ -62,30 +64,30 @@ class SearchForm extends React.Component {
                   startBusStopName: event.target.value})}
                 />
               </InputGroup>
-            </FormGroup>
-            <ul>
-              {
-                this.state.busStops === null ?
-                  'No bus stops' :
-                  this.state.busStops.filter(
-                    busStop => this.state.startBusStopName === '' ? false :
-                      (
-                      busStop.name.toLowerCase().includes(
-                        this.state.startBusStopName.toLowerCase()
+              <ListGroup>
+                {
+                  this.state.busStops === null ?
+                    'No bus stops' :
+                    this.state.busStops.filter(
+                      busStop => this.state.startBusStopName === '' ? false :
+                        (
+                          busStop.name.toLowerCase().includes(
+                            this.state.startBusStopName.toLowerCase()
+                          )
+                        )
+                    ).map(
+                      busStop => (
+                        <ListGroupItem key={busStop.id}>
+                          id_{busStop.id}_
+                          name_{busStop.name}_
+                          latitude_{busStop.latitude}_
+                          longtitude_{busStop.longtitude}_
+                        </ListGroupItem>
                       )
                     )
-                  ).map(
-                    busStop => (
-                      <li key={busStop.id}>
-                        id_{busStop.id}_
-                        name_{busStop.name}_
-                        latitude_{busStop.latitude}_
-                        longtitude_{busStop.longtitude}_
-                      </li>
-                    )
-                  )
-              }
-            </ul>
+                }
+              </ListGroup>
+            </FormGroup>
             <FormGroup>
               <InputGroup>
                 <InputGroup.Addon>B</InputGroup.Addon>
@@ -97,30 +99,30 @@ class SearchForm extends React.Component {
                   endBusStopName: event.target.value})}
                 />
               </InputGroup>
-            </FormGroup>
-            <ul>
-              {
-                this.state.busStops === null ?
-                  'No bus stops' :
-                  this.state.busStops.filter(
-                    busStop => this.state.endBusStopName === '' ? false :
-                      (
-                      busStop.name.toLowerCase().includes(
-                        this.state.endBusStopName.toLowerCase()
+              <ListGroup>
+                {
+                  this.state.busStops === null ?
+                    'No bus stops' :
+                    this.state.busStops.filter(
+                      busStop => this.state.endBusStopName === '' ? false :
+                        (
+                          busStop.name.toLowerCase().includes(
+                            this.state.endBusStopName.toLowerCase()
+                          )
+                        )
+                    ).map(
+                      busStop => (
+                        <ListGroupItem key={busStop.id}>
+                          id_{busStop.id}_
+                          name_{busStop.name}_
+                          latitude_{busStop.latitude}_
+                          longtitude_{busStop.longtitude}_
+                        </ListGroupItem>
                       )
                     )
-                  ).map(
-                    busStop => (
-                      <li key={busStop.id}>
-                        id_{busStop.id}_
-                        name_{busStop.name}_
-                        latitude_{busStop.latitude}_
-                        longtitude_{busStop.longtitude}_
-                      </li>
-                    )
-                  )
-              }
-            </ul>
+                }
+              </ListGroup>
+            </FormGroup>
           </form>
           <p>Data</p>
           <DateTimeField
