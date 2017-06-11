@@ -15,7 +15,10 @@ class SearchForm extends React.Component {
     this.state = {
       date: "1990-06-05",
       format: "YYYY-MM-DD",
-      mode: "date"
+      mode: "date",
+      busStops: null,
+      busStopId: '',
+      busStopName: ''
     };
   }
 
