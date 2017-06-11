@@ -66,11 +66,11 @@ class SearchForm extends React.Component {
             Szukaj połączenia
           </Button>
         </Col>
-        <Button type="submit">
-          <Link to={'/'}>
+        <Link to={'/'}>
+          <Button type="submit">
             Powrót do logowania
-          </Link>
-        </Button>
+          </Button>
+        </Link>
       </div>
     )
   }
