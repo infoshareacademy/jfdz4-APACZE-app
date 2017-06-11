@@ -27,6 +27,18 @@ class SearchForm extends React.Component {
     return this.setState({date: newDate});
   }
 
+  componentWillMount() {
+    fetch(
+      `${process.env.PUBLIC_URL}/data/busStops.json`
+    ).then(
+      response => response.json().then(
+        busStops => this.setState ({
+          busStops
+        })
+      )
+    )
+  }
+
   render() {
     var DateTimeField = require('react-bootstrap-datetimepicker');
     return (
