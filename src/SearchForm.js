@@ -17,8 +17,14 @@ class SearchForm extends React.Component {
       format: "YYYY-MM-DD",
       mode: "date",
       busStops: null,
-      busStopId: '',
-      busStopName: ''
+      startBusStopId: '',
+      startBusStopName: '',
+      startBusStopLatitude: '',
+      startBusStopLongtitude: '',
+      endBusStopId: '',
+      endBusStopName: '',
+      endBusStopLatitude: '',
+      endBusStopLongtitude: ''
     };
   }
 
@@ -51,9 +57,9 @@ class SearchForm extends React.Component {
                 <FormControl
                   type="text"
                   placeholder="Przystanek początkowy"
-                  value={this.state.busStopName}
+                  value={this.state.startBusStopName}
                   onChange={event => this.setState({
-                  busStopName: event.target.value})}
+                  startBusStopName: event.target.value})}
                 />
               </InputGroup>
             </FormGroup>
@@ -62,9 +68,10 @@ class SearchForm extends React.Component {
                 this.state.busStops === null ?
                   'No bus stops' :
                   this.state.busStops.filter(
-                    busStop => (
+                    busStop => this.state.startBusStopName === '' ? false :
+                      (
                       busStop.name.toLowerCase().includes(
-                        this.state.busStopName.toLowerCase()
+                        this.state.startBusStopName.toLowerCase()
                       )
                     )
                   ).map(
@@ -82,9 +89,38 @@ class SearchForm extends React.Component {
             <FormGroup>
               <InputGroup>
                 <InputGroup.Addon>B</InputGroup.Addon>
-                <FormControl type="text" placeholder="Przystanek końcowy" />
+                <FormControl
+                  type="text"
+                  placeholder="Przystanek końcowy"
+                  value={this.state.endBusStopName}
+                  onChange={event => this.setState({
+                  endBusStopName: event.target.value})}
+                />
               </InputGroup>
             </FormGroup>
+            <ul>
+              {
+                this.state.busStops === null ?
+                  'No bus stops' :
+                  this.state.busStops.filter(
+                    busStop => this.state.endBusStopName === '' ? false :
+                      (
+                      busStop.name.toLowerCase().includes(
+                        this.state.endBusStopName.toLowerCase()
+                      )
+                    )
+                  ).map(
+                    busStop => (
+                      <li key={busStop.id}>
+                        id_{busStop.id}_
+                        name_{busStop.name}_
+                        latitude_{busStop.latitude}_
+                        longtitude_{busStop.longtitude}_
+                      </li>
+                    )
+                  )
+              }
+            </ul>
           </form>
           <p>Data</p>
           <DateTimeField
