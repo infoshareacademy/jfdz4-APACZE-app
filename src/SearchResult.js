@@ -10,18 +10,14 @@ import {
 
 class SearchResult extends React.Component {
     render() {
-        var przystanek_a = (
-
-            <p>A przystanek</p>
-        );
-        var przystanek_b = (
-                <p>B przystanek</p>
-        );
+        var przystanek_a = "kujawska"
+        var przystanek_b = "wojska-polskiego"
+        var header=("A "+przystanek_a+" B "+przystanek_b);
         return (
             <div>
                 <Col xsOffset={4} xs={4}>
 
-                    <Panel  header={przystanek_a}>
+                    <Panel header={header} >
 
                         <ListGroup fill>
                             <ListGroupItem>
