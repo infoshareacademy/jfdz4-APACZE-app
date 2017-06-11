@@ -6,8 +6,10 @@ import {
 import {
   Grid
 } from 'react-bootstrap'
-import LoginForm from './LoginFormView'
+import LoginForm from './components/LoginFormView'
 import SearchForm from './SearchForm'
+import RegistrationForm from './components/RegistrationFormView'
+
 import Users from './components/Users'
 
 const App = () => (
@@ -15,8 +17,10 @@ const App = () => (
         <Grid>
         <Route exact path="/" component={LoginForm}/>
         <Route path="/search" component={SearchForm}/>
+        <Route path="/register" component={RegistrationForm}/>
+        <Route path="/users" component={Users}/>
         </Grid>
       </Router>
 )
 
-export default App;
+export default App

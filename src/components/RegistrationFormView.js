@@ -1,24 +1,18 @@
 import React from 'react'
-import {Form, FormGroup, FormControl, Col, Checkbox, ControlLabel, Button} from 'react-bootstrap'
+import {Form, FormGroup, FormControl, Col, ControlLabel, Button} from 'react-bootstrap'
 import Schema from 'form-schema-validation'
-import { Form, TextField, CheckboxField, SubmitField } from 'react-components-form'
+//import { Form, TextField, CheckboxField, SubmitField } from 'react-components-form'
+import { Link } from 'react-router-dom'
 
 const emailValidator = () => ({
   validator(value){
-    const regex = /^[a-zA-Z0-9\.]+@[a-zA-Z0-9]+(\-)?[a-zA-Z0-9]+(\.)?[a-zA-Z0-9]{0,6}?\.[a-zA-Z]{2,6}$/;
+    const regex = /^[a-zA-Z0-9]+@[a-zA-Z0-9]?[a-zA-Z0-9]+(\.)?[a-zA-Z0-9]{0,6}?\.[a-zA-Z]{2,6}$/;
     if (!value.match(regex)) {
       return false;
     }
     return true;
   },
-  errorMessage: 'Inserted value is not a email address'
-});
-
-const sameValueAs = (fieldName) => ({
-  validator(value, type, model){
-    return value === model[fieldName];
-  },
-  errorMessage: 'Repeated password is incorrect'
+  errorMessage: 'Podana wartość nie jest adresem email'
 });
 
 const registrationSchema = new Schema({
@@ -34,31 +28,64 @@ const registrationSchema = new Schema({
   password: {
     type: String,
     required: true
-  },
-  password2: {
-    type: String,
-    required: true,
-    validators: [sameValueAs('password')]
-  },
-  termsAccepted: {
-    type: Boolean,
-    required: true,
   }
 });
 
 const RegistrationForm  = () => (
-  <Form
+  <Form horizontal
     schema={registrationSchema}
     onSubmit={data => console.log(data)}
     onError={(errors, data) => console.log('error', errors, data)}
   >
-    <h4>Registration form</h4>
-    <TextField name="name" label="Name" type="text" />
-    <TextField name="email" label="Email" type="text" />
-    <TextField name="password" label="Password" type="password" />
-    <TextField name="password2" label="Repeat password" type="password" />
-    <CheckboxField name="termsAccepted" label="Accept terms" />
-    <SubmitField value="Register" />
+
+    <FormGroup>
+      <Col smOffset={1} xs={2}>
+      </Col>
+      <Col xs={8} sm={7}>
+        <h4>Rejestracja konta</h4>
+      </Col>
+    </FormGroup>
+    <FormGroup controlId="formHorizontalName">
+      <Col componentClass={ControlLabel} smOffset={1} xs={2}>
+        Nazwa konta
+      </Col>
+      <Col xs={8} sm={7}>
+        <FormControl type="name" placeholder="Nazwa"/>
+      </Col>
+    </FormGroup>
+
+    <FormGroup controlId="formHorizontalEmail">
+      <Col componentClass={ControlLabel} smOffset={1} xs={2}>
+        E-mail
+      </Col>
+      <Col xs={8} sm={7}>
+        <FormControl type="email" placeholder="E-mail"/>
+      </Col>
+    </FormGroup>
+
+    <FormGroup controlId="formHorizontalPassword">
+      <Col componentClass={ControlLabel} smOffset={1} xs={2}>
+        Hasło
+      </Col>
+      <Col xs={8} sm={7}>
+        <FormControl type="password" placeholder="Hasło"/>
+      </Col>
+    </FormGroup>
+
+    <FormGroup>
+      <Col xsOffset={2} smOffset={3} xs={8}>
+        <Button type="submit">
+          <Link to={'/register'}>
+            Zarejestruj
+          </Link>
+        </Button>
+        <Button type="submit">
+          <Link to={'/'}>
+            Powrót do logowania
+          </Link>
+        </Button>
+      </Col>
+    </FormGroup>
   </Form>
 );
 

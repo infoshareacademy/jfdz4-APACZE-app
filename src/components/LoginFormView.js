@@ -39,6 +39,16 @@ class LoginForm extends React.Component {
                   Zaloguj
                 </Link>
               </Button>
+              <Button type="submit">
+                <Link to={'/register'}>
+                  Zarejestruj
+                </Link>
+              </Button>
+              <Button type="submit">
+                <Link to={'/users'}>
+                  Użytkownicy
+                </Link>
+              </Button>
             </Col>
           </FormGroup>
         </Form>
