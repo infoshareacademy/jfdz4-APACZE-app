@@ -77,7 +77,19 @@ class SearchForm extends React.Component {
                         )
                     ).map(
                       busStop => (
-                        <ListGroupItem key={busStop.id}>
+                        <ListGroupItem
+                          key={busStop.id}
+                          onClick={() => {
+                            this.setState({
+                              ...this.state,
+                              startBusStopId: busStop.id,
+                              startBusStopName: busStop.name,
+                              startBusStopLatitude: busStop.latitude,
+                              startBusStopLongtitude: busStop.longtitude
+                            })
+                          }
+                          }
+                        >
                           id_{busStop.id}_
                           name_{busStop.name}_
                           latitude_{busStop.latitude}_
@@ -112,7 +124,19 @@ class SearchForm extends React.Component {
                         )
                     ).map(
                       busStop => (
-                        <ListGroupItem key={busStop.id}>
+                        <ListGroupItem
+                          key={busStop.id}
+                          onClick={() => {
+                            this.setState({
+                              ...this.state,
+                              endBusStopId: busStop.id,
+                              endBusStopName: busStop.name,
+                              endBusStopLatitude: busStop.latitude,
+                              endBusStopLongtitude: busStop.longtitude
+                            })
+                          }
+                          }
+                        >
                           id_{busStop.id}_
                           name_{busStop.name}_
                           latitude_{busStop.latitude}_
