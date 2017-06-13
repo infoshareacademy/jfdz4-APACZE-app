@@ -11,10 +11,19 @@ import {
 } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
+const styles = {
+  base: {},
+  hidden: {
+    display: 'none'
+  }
+}
+
 class SearchForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      showStartBusStopList: false,
+      showEndBusStopList: false,
       date: "1990-06-05",
       format: "YYYY-MM-DD",
       mode: "date",
@@ -60,11 +69,21 @@ class SearchForm extends React.Component {
                   type="text"
                   placeholder="Przystanek początkowy"
                   value={this.state.startBusStopName}
-                  onChange={event => this.setState({
-                  startBusStopName: event.target.value})}
+                  onChange={event =>
+                    this.setState({
+                      startBusStopName: event.target.value,
+                      showStartBusStopList: true
+                    })
+                  }
                 />
               </InputGroup>
-              <ListGroup>
+              <ListGroup
+                style={
+                  this.state.showStartBusStopList === false ?
+                    styles.hidden :
+                    styles.base
+                }
+              >
                 {
                   this.state.busStops === null ?
                     'No bus stops' :
@@ -85,7 +104,8 @@ class SearchForm extends React.Component {
                               startBusStopId: busStop.id,
                               startBusStopName: busStop.name,
                               startBusStopLatitude: busStop.latitude,
-                              startBusStopLongtitude: busStop.longtitude
+                              startBusStopLongtitude: busStop.longtitude,
+                              showStartBusStopList: false
                             })
                           }
                           }
@@ -107,11 +127,21 @@ class SearchForm extends React.Component {
                   type="text"
                   placeholder="Przystanek końcowy"
                   value={this.state.endBusStopName}
-                  onChange={event => this.setState({
-                  endBusStopName: event.target.value})}
+                  onChange={event =>
+                    this.setState({
+                      endBusStopName: event.target.value,
+                      showEndBusStopList: true
+                    })
+                  }
                 />
               </InputGroup>
-              <ListGroup>
+              <ListGroup
+                style={
+                  this.state.showEndBusStopList === false ?
+                    styles.hidden :
+                    styles.base
+                }
+              >
                 {
                   this.state.busStops === null ?
                     'No bus stops' :
@@ -132,7 +162,8 @@ class SearchForm extends React.Component {
                               endBusStopId: busStop.id,
                               endBusStopName: busStop.name,
                               endBusStopLatitude: busStop.latitude,
-                              endBusStopLongtitude: busStop.longtitude
+                              endBusStopLongtitude: busStop.longtitude,
+                              showEndBusStopList: false
                             })
                           }
                           }
