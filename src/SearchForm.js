@@ -24,9 +24,6 @@ class SearchForm extends React.Component {
     this.state = {
       showStartBusStopList: false,
       showEndBusStopList: false,
-      date: "1990-06-05",
-      format: "YYYY-MM-DD",
-      mode: "date",
       busStops: null,
       startBusStopId: '',
       startBusStopName: '',
@@ -37,11 +34,6 @@ class SearchForm extends React.Component {
       endBusStopLatitude: '',
       endBusStopLongtitude: ''
     };
-  }
-
-  handleDateChange = (newDate) => {
-    console.log("newDate", newDate);
-    return this.setState({date: newDate});
   }
 
   componentWillMount() {
@@ -57,7 +49,6 @@ class SearchForm extends React.Component {
   }
 
   render() {
-    var DateTimeField = require('react-bootstrap-datetimepicker');
     return (
       <div>
         <Col xsOffset={4} xs={4}>
@@ -180,15 +171,7 @@ class SearchForm extends React.Component {
             </FormGroup>
           </form>
           <p>Data</p>
-          <DateTimeField
-            mode="date"
-            inputFormat="DD-MM-YYYY"
-            onChange={this.handleDateChange}
-          />
           <p>Godzina</p>
-          <DateTimeField
-            mode="time"
-          />
           <FormGroup>
             <Radio name="radioGroup" inline>
               Odjazd
