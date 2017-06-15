@@ -10,6 +10,8 @@ import {
   ListGroupItem
 } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import DatePicker from 'react-datepicker'
+import moment from 'moment'
 
 const styles = {
   base: {},
@@ -54,7 +56,6 @@ class SearchForm extends React.Component {
   render() {
     return (
       <div>
-        <p>{this.state.date}</p>
         <Col xsOffset={4} xs={4}>
           <form>
             <FormGroup >
