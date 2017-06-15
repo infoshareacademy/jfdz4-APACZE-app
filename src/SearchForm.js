@@ -13,6 +13,8 @@ import { Link } from 'react-router-dom'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
 
+import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+
 const styles = {
   base: {},
   hidden: {
@@ -35,10 +37,17 @@ class SearchForm extends React.Component {
       endBusStopName: '',
       endBusStopLatitude: '',
       endBusStopLongtitude: '',
-      date: '',
+      date: moment(),
       time: '',
       startEnd: ''
     };
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(date) {
+    this.setState({
+      date: date
+    });
   }
 
   componentWillMount() {
@@ -176,6 +185,11 @@ class SearchForm extends React.Component {
             </FormGroup>
           </form>
           <p>Data</p>
+          <DatePicker
+            locale="pl-pl"
+            selected={this.state.date}
+            onChange={this.handleChange}
+          />
           <p>Godzina</p>
           <FormGroup>
             <Radio name="radioGroup"
