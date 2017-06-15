@@ -1,4 +1,6 @@
 import React from 'react'
+import { Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 class RegistrationSuccessForm extends React.Component {
   constructor(props) {
@@ -9,7 +11,12 @@ class RegistrationSuccessForm extends React.Component {
   render() {
     return (
       <div>
-        <span>Rejestracja dla użytkownika ? powiodła się!</span>
+        <div><span>Rejestracja powiodła się!</span></div>
+        <Button type="submit">
+          <Link to={'/search'}>
+            Przejdź do wyszukiwarki
+          </Link>
+        </Button>
       </div>
     )
   }

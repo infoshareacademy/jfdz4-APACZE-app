@@ -35,8 +35,13 @@ class LoginForm extends React.Component {
           <FormGroup>
             <Col xsOffset={2} smOffset={3} xs={8}>
               <Button type="submit">
-                <Link to={'/search'}>
+                <Link to={'/'}>
                   Zaloguj
+                </Link>
+              </Button>
+              <Button type="submit">
+                <Link to={'/search'}>
+                  Wyszukaj
                 </Link>
               </Button>
               <Button type="submit">
