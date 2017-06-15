@@ -32,7 +32,10 @@ class SearchForm extends React.Component {
       endBusStopId: '',
       endBusStopName: '',
       endBusStopLatitude: '',
-      endBusStopLongtitude: ''
+      endBusStopLongtitude: '',
+      date: '',
+      time: '',
+      startEnd: ''
     };
   }
 
@@ -51,6 +54,7 @@ class SearchForm extends React.Component {
   render() {
     return (
       <div>
+        <p>{this.state.date}</p>
         <Col xsOffset={4} xs={4}>
           <form>
             <FormGroup >
@@ -173,11 +177,33 @@ class SearchForm extends React.Component {
           <p>Data</p>
           <p>Godzina</p>
           <FormGroup>
-            <Radio name="radioGroup" inline>
+            <Radio name="radioGroup"
+                   inline
+                   onClick={ this.state.startEnd === 0 ?
+                     false :
+                     () => {
+                       this.setState({
+                         ...this.state,
+                         startEnd: 0
+                       })
+                     }
+                   }
+            >
               Odjazd
             </Radio>
             {' '}
-            <Radio name="radioGroup" inline>
+            <Radio name="radioGroup"
+                   inline
+                   onClick={ this.state.startEnd === 1 ?
+                     false :
+                     () => {
+                       this.setState({
+                         ...this.state,
+                         startEnd: 1
+                       })
+                     }
+                   }
+            >
               Przyjazd
             </Radio>
           </FormGroup>
