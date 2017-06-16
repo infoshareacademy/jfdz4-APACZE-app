@@ -6,7 +6,6 @@
     "bootstrap": "^3.3.7",
     "moment": "^2.18.1",
     "moment-timezone": "^0.5.13",
-    "rc-time-picker": "^2.4.1",
     "react": "^15.5.4",
     "react-bootstrap": "^0.31.0",
     "react-datepicker": "^0.47.0",
