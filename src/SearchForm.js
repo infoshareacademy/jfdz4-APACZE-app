@@ -39,7 +39,6 @@ class SearchForm extends React.Component {
       endBusStopLatitude: '',
       endBusStopLongtitude: '',
       date: moment(),
-      time: '',
       startEnd: ''
     };
     this.handleChange = this.handleChange.bind(this);
