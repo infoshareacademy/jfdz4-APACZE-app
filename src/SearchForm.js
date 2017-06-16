@@ -52,7 +52,7 @@ class SearchForm extends React.Component {
 
   componentWillMount() {
     fetch(
-      `${process.env.PUBLIC_URL}/data/busStops.json`
+      `${process.env.PUBLIC_URL}/data/workDaySchedule.json`
     ).then(
       response => response.json().then(
         busStops => this.setState ({
