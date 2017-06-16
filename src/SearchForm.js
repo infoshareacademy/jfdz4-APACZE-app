@@ -4,6 +4,7 @@ import {
   FormControl,
   Col,
   Button,
+  ButtonToolbar,
   InputGroup,
   Radio,
   ListGroup,
@@ -191,6 +192,43 @@ class SearchForm extends React.Component {
             onChange={this.handleChange}
           />
           <p>Godzina</p>
+          <ButtonToolbar>
+            <Button onClick={() => {
+              this.setState({
+                ...this.state,
+                date: this.state.date.add(1, "h")
+              })
+            }}>
+              HH &uarr;
+            </Button>
+            <Button onClick={() => {
+              this.setState({
+                ...this.state,
+                date: this.state.date.add(1, "m")
+              })
+            }}>
+              mm &uarr;
+            </Button>
+          </ButtonToolbar>
+          <p>{this.state.date.format("HH:mm")}</p>
+          <ButtonToolbar>
+            <Button onClick={() => {
+              this.setState({
+                ...this.state,
+                date: this.state.date.add(-1, "h")
+              })
+            }}>
+              HH &darr;
+            </Button>
+            <Button onClick={() => {
+              this.setState({
+                ...this.state,
+                date: this.state.date.add(-1, "m")
+              })
+            }}>
+              mm &darr;
+            </Button>
+          </ButtonToolbar>
           <FormGroup>
             <Radio name="radioGroup"
                    inline
