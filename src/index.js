@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { browserHistory } from 'react-router'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 import { Provider } from 'react-redux'
 import firebase from 'firebase'
 
@@ -8,6 +10,9 @@ import 'bootstrap/dist/css/bootstrap-theme.css'
 
 import store from './store'
 import App from './App';
+import SearchForm from './SearchForm'
+import RegistrationForm from './components/RegistrationFormView'
+import Users from './components/Users'
 
 var config = {
   apiKey: "AIzaSyAHIAHM0WNO3yJTREg5Yzc8ZDXGDf3FdSE",
@@ -21,7 +26,22 @@ firebase.initializeApp(config);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App/>
+    <Router history={browserHistory}>
+      <Route path="/" component={App}>
+        <Route path="/search" component={SearchForm}/>
+        <Route path="/register" component={RegistrationForm}/>
+        <Route path="/users" component={Users}/>
+      </Route>
+    </Router>
   </Provider>,
   document.getElementById('root')
 );
+
+
+
+// ReactDOM.render(
+//   <Provider store={store}>
+//     <App/>
+//   </Provider>,
+//   document.getElementById('root')
+// );

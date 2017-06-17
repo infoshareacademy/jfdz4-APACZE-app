@@ -1,11 +1,18 @@
 import React from 'react'
-import { compose } from 'redux'
 import { connect } from 'react-redux'
 import {Form, FormGroup, FormControl, Col, ControlLabel, Button} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import firebase from 'firebase'
-import actions from './logActions'
 
+export default connect(
+  state => ({
+    user: state.user || null
+  }),
+  dispatch => ({
+    login: () => dispatch({type: 'AUTH_USER'}),
+    failed: () => dispatch({type: 'UNAUTH_USER'})
+  })
+)(
 class RegistrationForm extends React.Component {
 
   constructor(props) {
@@ -17,16 +24,12 @@ class RegistrationForm extends React.Component {
     }
   }
 
-  handleChange = (e) => {
-    let newState = {};
-    newState[e.target.name] = e.target.value;
-    this.setState(newState);
-  };
+  handleChange = event => this.setState({
+    [event.target.name]: event.target.value
+  })
 
   handleSubmit = (e, message) => {
     e.preventDefault();
-
-    console.log(this.state)
 
     let email = this.state.email
     let password = this.state.password
@@ -42,9 +45,7 @@ class RegistrationForm extends React.Component {
     //tutaj zapis w firebase
     firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
       //po then strona z informacją o sukcesie
-      .then(
-        () => this.props.history.push('/successForm')
-      )
+      .then()
       .catch(function (error) {
       // Handle Errors here.
       const errorCode = error.code;
@@ -123,13 +124,4 @@ class RegistrationForm extends React.Component {
     )
   }
 }
-
-const mapStateToProps = state => {
-  return {
-    //errorMessage: state.auth.error
-  };
-};
-
-export default compose(
-  connect(mapStateToProps, actions)
-)(RegistrationForm)
+)

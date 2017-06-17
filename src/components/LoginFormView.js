@@ -1,57 +1,53 @@
 import React, { Component }  from 'react'
-import {Form, FormGroup, FormControl, Col, Checkbox, ControlLabel, Button} from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import { compose } from "redux"
-import { connect } from "react-redux"
-import actions from './logActions'
+import {Form, FormGroup, FormControl, Col, ControlLabel, Button} from 'react-bootstrap'
+import {BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import firebase from 'firebase'
 
-class LoginForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: '',
-      password: ''
-    }
+export default connect(
+  state => ({
+    user: state.user || null
+  }),
+  dispatch => ({
+    login: () => dispatch({type: 'AUTH_USER'}),
+    loguot: () => dispatch({type: 'AUTH/LOGOUT'}),
+    failed: () => dispatch({type: 'UNAUTH_USER'})
+  })
+)(
+  class LoginForm extends React.Component {
 
-    this.renderAlert = this.renderAlert.bind(this);
+  state = {
+    email: '',
+    password: ''
   }
 
-  onSubmit(e) {
-    e.preventDefault()
-  }
+  handleChange = event => this.setState({
+    [event.target.name]: event.target.value
+  })
 
-  onChange(e) {
-    this.setState( { [e.target.name]: e.target.value } )
-  }
-
-  handleFormSubmit({ email, password }) {
-    this.props.signinUser({ email, password });
-  }
-
-  renderAlert() {
-    const { errorMessage } = this.props;
-    if (errorMessage) {
-      return (
-        <div className="alert alert-danger">
-          <strong>Oops!</strong> {errorMessage}
-        </div>
-      );
-    }
+  handleSubmit = event => {
+    event.preventDefault()
+    firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then(
+      data => console.log('data: ', data)
+    ).catch(
+      error => console.log('error: ', error)
+    )
   }
 
   render() {
-    const { email, password } = this.state;
+
     return (
       <div>
         <Form horizontal
-              onSubmit={this.onSubmint}
+              onSubmit={this.onSubmit}
         >
           <FormGroup controlId="formHorizontalEmail">
             <Col componentClass={ControlLabel} smOffset={1} xs={2}>
               E-mail
             </Col>
             <Col xs={8} sm={7}>
-              <FormControl type="email" placeholder="E-mail" {...email}/>
+              <FormControl type="email" placeholder="E-mail"
+                           value={this.state.email} onChange={this.handleChange}/>
             </Col>
           </FormGroup>
 
@@ -60,17 +56,17 @@ class LoginForm extends Component {
               Hasło
             </Col>
             <Col xs={8} sm={7}>
-              <FormControl type="password" placeholder="Hasło" {...password}/>
+              <FormControl type="password" placeholder="Hasło"
+                           value={this.state.password} onChange={this.handleChange}/>
             </Col>
           </FormGroup>
 
           <FormGroup>
             <Col xsOffset={2} smOffset={3} xs={8}>
-              {this.renderAlert()}
               <Button action="submit" className="btn btn-primary">
-                <Link to={'/'}>
-                  Zaloguj
-                </Link>
+
+                Zaloguj
+
               </Button>
               <Button type="submit">
                 <Link to={'/search'}>
@@ -87,6 +83,7 @@ class LoginForm extends Component {
                   Użytkownicy
                 </Link>
               </Button>
+
             </Col>
           </FormGroup>
         </Form>
@@ -94,13 +91,4 @@ class LoginForm extends Component {
     )
   }
 }
-
-const mapStateToProps = state => {
-  return {
-    errorMessage: state.auth.error
-  };
-};
-
-export default compose(
-  connect(mapStateToProps, actions)
-)(LoginForm)
+)
