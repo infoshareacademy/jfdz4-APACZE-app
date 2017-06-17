@@ -25,7 +25,6 @@ class LoginForm extends Component {
   }
 
   handleFormSubmit({ email, password }) {
-    // Need to do something to log user in
     this.props.signinUser({ email, password });
   }
 
@@ -62,12 +61,6 @@ class LoginForm extends Component {
             </Col>
             <Col xs={8} sm={7}>
               <FormControl type="password" placeholder="Hasło" {...password}/>
-            </Col>
-          </FormGroup>
-
-          <FormGroup>
-            <Col xsOffset={2} smOffset={3} xs={8}>
-              <Checkbox>Zapamiętaj mnie</Checkbox>
             </Col>
           </FormGroup>
 
