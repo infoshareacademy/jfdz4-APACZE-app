@@ -39,7 +39,8 @@ class SearchForm extends React.Component {
       endBusStopLatitude: '',
       endBusStopLongtitude: '',
       date: moment(),
-      startEnd: ''
+      startEnd: '',
+      connectionExists: null
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -52,7 +53,7 @@ class SearchForm extends React.Component {
 
   componentWillMount() {
     fetch(
-      `${process.env.PUBLIC_URL}/data/workDaySchedule.json`
+      'https://crossorigin.me/http://91.244.248.19/dataset/c24aa637-3619-4dc2-a171-a23eec8f2172/resource/4128329f-5adb-4082-b326-6e1aea7caddf/download/routes.json'
     ).then(
       response => response.json().then(
         busStops => this.setState ({
@@ -259,15 +260,18 @@ class SearchForm extends React.Component {
               Przyjazd
             </Radio>
           </FormGroup>
-          <Button type="submit">
+          <Button
+            type="submit"
+          >
             Szukaj połączenia
           </Button>
+          <p>{this.state.connectionExists}</p>
+          <Link to={'/'}>
+            <Button type="submit">
+              Powrót do logowania
+            </Button>
+          </Link>
         </Col>
-        <Link to={'/'}>
-          <Button type="submit">
-            Powrót do logowania
-          </Button>
-        </Link>
       </div>
     )
   }
