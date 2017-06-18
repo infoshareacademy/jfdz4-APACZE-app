@@ -16,7 +16,8 @@ import SearchForm from './SearchForm'
 class SearchResult extends React.Component {
 
     render() {
-        const startBusStopName ='co kolwiek'
+
+        const startBusStopName ='jko'
         const endBusStopName = "wojska-polskiego"
         const date ='18.06.2018'
         return (
