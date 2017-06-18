@@ -3,15 +3,20 @@ import {
     Col,
     FormGroup,
     InputGroup,
-    FormControl
+    FormControl,
+    Button
 
 
 } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
+import SearchForm from './SearchForm'
+
 
 class SearchResult extends React.Component {
+
     render() {
-        var przystanek_a = "kujawska"
-        var przystanek_b = "wojska-polskiego"
+        const startBusStopName ='co kolwiek'
+        const endBusStopName = "wojska-polskiego"
         return (
             <div>
                 <Col xsOffset={4} xs={4}>
@@ -19,19 +24,24 @@ class SearchResult extends React.Component {
                         <FormGroup >
                             <InputGroup >
                                 <InputGroup.Addon>A</InputGroup.Addon>
-                                <FormControl type="text" value={przystanek_a} disabled/>
+                                <FormControl type="text" value={startBusStopName} disabled/>
                             </InputGroup>
                         </FormGroup>
                         <FormGroup>
                             <InputGroup>
                                 <InputGroup.Addon>B</InputGroup.Addon>
-                                <FormControl type="text" value={przystanek_b} disabled/>
+                                <FormControl type="text" value={endBusStopName} disabled/>
                             </InputGroup>
                         </FormGroup>
                     </form>
 
 
                 </Col>
+                <Link to={'/search'}>
+                    <Button type="submit">
+                        Powrót do wyszukiwania
+                    </Button>
+                </Link>
             </div>
         )
     }

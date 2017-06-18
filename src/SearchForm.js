@@ -259,9 +259,11 @@ class SearchForm extends React.Component {
               Przyjazd
             </Radio>
           </FormGroup>
+          <Link to={'/result'}>
           <Button type="submit">
             Szukaj połączenia
           </Button>
+          </Link>
         </Col>
         <Link to={'/'}>
           <Button type="submit">
