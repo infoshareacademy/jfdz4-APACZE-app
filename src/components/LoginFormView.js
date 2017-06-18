@@ -80,7 +80,7 @@ export default class LoginForm extends React.Component {
             </Col>
             <Col xs={8} sm={7}>
               <FormControl type="email" placeholder="E-mail" name="email"
-                           value={this.state.email} onChange={this.handleChange}/>
+               value={this.state.email} onChange={this.handleChange} autoComplete="off"/>
             </Col>
           </FormGroup>
 
@@ -90,7 +90,7 @@ export default class LoginForm extends React.Component {
             </Col>
             <Col xs={8} sm={7}>
               <FormControl type="password" placeholder="Hasło" name="password"
-                           value={this.state.password} onChange={this.handleChange}/>
+               value={this.state.password} onChange={this.handleChange} autoComplete="off"/>
             </Col>
           </FormGroup>
 
