@@ -47,7 +47,7 @@ export default class LoginForm extends React.Component {
 
   componentWillMount() {
 
-    firebase.auth().onAuthStateChanged(user => {
+    this.unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setState({
           user: user
@@ -60,6 +60,9 @@ export default class LoginForm extends React.Component {
     });
   }
 
+  componentWillUnmount () {
+    this.unsubscribe()
+  }
 
   render() {
 
