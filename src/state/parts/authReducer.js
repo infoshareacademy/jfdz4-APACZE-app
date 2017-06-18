@@ -1,17 +1,22 @@
-const INITIAL_STATE = {};
+const initialState = {
+  authenticated: false,
+  logged: false,
+  error: '',
+  message: ''
+};
 
-export default function(state = INITIAL_STATE, action) {
+export default (state = initialState, action) => {
   switch (action.type) {
     // Successful authentication
-    case action.type === 'AUTH_USER':
+    case 'AUTH_USER':
       return { ...state, authenticated: true, error: '' };
-    case action.type === 'UNAUTH_USER':
+    case 'UNAUTH_USER':
       return { ...state, authenticated: false };
-    case action.type === 'AUTH_ERROR':
+    case 'AUTH_ERROR':
       return { ...state, error: action.payload };
-    case action.type === 'FETCH_MESSAGE':
+    case 'FETCH_MESSAGE':
       return { ...state, message: action.payload }
     default:
       return state;
   }
-};
+}

@@ -1,12 +1,8 @@
-import React, {Component} from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom'
-import {Grid} from 'react-bootstrap'
+import React from 'react';
 import firebase from 'firebase'
 
 import LoginForm from './components/LoginFormView'
-import SearchForm from './SearchForm'
-import RegistrationForm from './components/RegistrationFormView'
-import Users from './components/Users'
+
 
 export default class App extends React.Component {
 
@@ -15,6 +11,7 @@ export default class App extends React.Component {
   }
 
   componentWillMount() {
+    
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.setState({
@@ -34,25 +31,16 @@ export default class App extends React.Component {
       <div>
         {
           this.state.user === null ?
-            null :
+            null 
+            :
             <p>
-              Hello {this.state.user.email}
+              Użytkownik {this.state.user.email} jest zalogowany
               <button onClick={() => firebase.auth().signOut()}>
                 Wyloguj
               </button>
             </p>
         }
         <LoginForm/>
-
-        <Router>
-          <Grid>
-            <Route exact path="/" component={LoginForm}/>
-            <Route path="/search" component={SearchForm}/>
-            <Route path="/register" component={RegistrationForm}/>
-            <Route path="/users" component={Users}/>
-
-          </Grid>
-        </Router>
       </div>
     )
   }

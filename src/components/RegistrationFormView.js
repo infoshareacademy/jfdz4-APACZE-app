@@ -4,21 +4,21 @@ import {Form, FormGroup, FormControl, Col, ControlLabel, Button} from 'react-boo
 import {Link} from 'react-router-dom'
 import firebase from 'firebase'
 
-export default connect(
-  state => ({
-    user: state.user || null
-  }),
-  dispatch => ({
-    login: () => dispatch({type: 'AUTH_USER'}),
-    failed: () => dispatch({type: 'UNAUTH_USER'})
-  })
-)(
-class RegistrationForm extends React.Component {
+// export default connect(
+//   state => ({
+//     user: state.user || null
+//   }),
+//   dispatch => ({
+//     login: () => dispatch({type: 'AUTH_USER'}),
+//     failed: () => dispatch({type: 'UNAUTH_USER'})
+//   })
+// )(
+
+export default class RegistrationForm extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
       email: '',
       password: ''
     }
@@ -44,8 +44,14 @@ class RegistrationForm extends React.Component {
 
     //tutaj zapis w firebase
     firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-      //po then strona z informacją o sukcesie
-      .then()
+      //po then logowanie
+      // .then(
+      //   firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
+      // )
+      .then(
+        //() => this.props.history.push('/search')
+        () => this.props.history.push('/')
+      )
       .catch(function (error) {
       // Handle Errors here.
       const errorCode = error.code;
@@ -80,21 +86,14 @@ class RegistrationForm extends React.Component {
             <h4>Rejestracja konta</h4>
           </Col>
         </FormGroup>
-        <FormGroup controlId="formHorizontalName">
-          <Col componentClass={ControlLabel} smOffset={1} xs={2}>
-            Nazwa konta
-          </Col>
-          <Col xs={8} sm={7}>
-            <FormControl type="name" placeholder="Nazwa" name='name' onChange={this.handleChange}/>
-          </Col>
-        </FormGroup>
 
         <FormGroup controlId="formHorizontalEmail">
           <Col componentClass={ControlLabel} smOffset={1} xs={2}>
             E-mail
           </Col>
           <Col xs={8} sm={7}>
-            <FormControl type="email" placeholder="E-mail" name='email' onChange={this.handleChange}/>
+            <FormControl type="email" placeholder="E-mail"
+                         name='email' onChange={this.handleChange}/>
           </Col>
         </FormGroup>
 
@@ -110,7 +109,7 @@ class RegistrationForm extends React.Component {
 
         <FormGroup>
           <Col xsOffset={2} smOffset={3} xs={8}>
-            <Button type="submit">
+            <Button type="submit" className="btn btn-primary">
               Zarejestruj
             </Button>
             <Button>
@@ -124,4 +123,4 @@ class RegistrationForm extends React.Component {
     )
   }
 }
-)
+//)

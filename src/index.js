@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router'
 import {BrowserRouter as Router, Route} from 'react-router-dom'
 import { Provider } from 'react-redux'
 import firebase from 'firebase'
+import { Grid } from 'react-bootstrap'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap/dist/css/bootstrap-theme.css'
@@ -27,21 +28,13 @@ firebase.initializeApp(config);
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={App}>
+      <Grid>
+        <Route exact path="/" component={App}/>
         <Route path="/search" component={SearchForm}/>
         <Route path="/register" component={RegistrationForm}/>
         <Route path="/users" component={Users}/>
-      </Route>
+      </Grid>
     </Router>
   </Provider>,
   document.getElementById('root')
-);
-
-
-
-// ReactDOM.render(
-//   <Provider store={store}>
-//     <App/>
-//   </Provider>,
-//   document.getElementById('root')
-// );
+)
