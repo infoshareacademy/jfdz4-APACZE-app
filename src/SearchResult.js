@@ -9,7 +9,7 @@ import {
 
 } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import DatePicker from 'react-datepicker'
+
 import SearchForm from './SearchForm'
 
 
@@ -18,6 +18,7 @@ class SearchResult extends React.Component {
     render() {
         const startBusStopName ='co kolwiek'
         const endBusStopName = "wojska-polskiego"
+        const date ='18.06.2018'
         return (
             <div>
                 <Col xsOffset={4} xs={4}>
@@ -36,10 +37,7 @@ class SearchResult extends React.Component {
                         </FormGroup>
                     </form>
                     <p>Data</p>
-                    <DatePicker
-                        locale="pl-pl"
-                        selected={this.state.date}
-                    />
+                    <input value={date}/>
 
 
                 </Col>
