@@ -18,10 +18,24 @@ export default class LoginForm extends React.Component {
   handleSubmit = event => {
     
     event.preventDefault()
+
+    let email = this.state.email
+    let password = this.state.password
+    if (email.length < 4) {
+      alert('Proszę wprowadzić poprawny email');
+      return;
+    }
+    if (password.length < 6) {
+      alert('Hasło musi posiadać długość przynajmniej 6 znaków');
+      return;
+    }
+
     firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then(
       data => console.log('data: ', data)
     ).catch(
       error => {
+      if (error.code === 'auth/invalid-email')
+          return alert('Podany email jest nieprawidłowy');
       if (error.code === 'auth/user-not-found')
         return alert('Musisz się najpierw zarejestrować');
       if (error.code === 'auth/wrong-password')

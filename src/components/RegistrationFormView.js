@@ -34,7 +34,6 @@ export default class RegistrationForm extends React.Component {
     //tutaj zapis w firebase
     firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(
-        //() => this.props.history.push('/search')
         () => this.props.history.push('/')
       )
       .catch(function (error) {
