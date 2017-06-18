@@ -5,3 +5,11 @@ export default (state = {}, action) => {
     users: users(state.users, action),
   }
 }
+
+import busStopsSearch from './parts/busStopsSearch'
+
+export default (state = {}, action = {}) => {
+  return {
+    busStopsSearch: busStopsSearch(state.busStopsSearch, action)
+  }
+}
