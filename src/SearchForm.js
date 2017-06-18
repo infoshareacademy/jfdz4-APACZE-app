@@ -1,28 +1,33 @@
 import React from 'react'
-import moment from 'moment'
 
 class SearchForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      startBusStopId: '',
-      endBusStopId: '',
-      date: moment(),
-      startEnd: '',
-      busStops: null
-    };
-  }
-
-  componentWillMount() {
-    fetch(
-      'https://crossorigin.me/http://91.244.248.19/dataset/c24aa637-3619-4dc2-a171-a23eec8f2172/resource/0f2de200-e78b-4183-ae0d-071d7f07fc3f/download/stopsintrips.json'
-    ).then(
-      response => response.json().then(
-        busStops => this.setState ({
-          busStops
-        })
-      )
-    )
+      startBusStopId: 313,
+      endBusStopId: 102,
+      date: "2017-06-23",
+      start: [{
+        "routeId": 110,
+        "tripId": 31,
+        "stopId": 313,
+        "stopSequence": 0,
+        "agencyId": 1,
+        "topologyVersionId": 371,
+        "tripActivationDate": "2017-04-21",
+        "stopActivationDate": "2017-06-13"
+      }],
+      stop: [{
+        "routeId":110,
+        "tripId":31,
+        "stopId":102,
+        "stopSequence":16,
+        "agencyId":1,
+        "topologyVersionId":371,
+        "tripActivationDate":"2017-04-21",
+        "stopActivationDate":"2017-06-13"
+      }]
+    }
   }
 
   render() {
