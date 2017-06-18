@@ -78,7 +78,7 @@ export default class RegistrationForm extends React.Component {
           </Col>
           <Col xs={8} sm={7}>
             <FormControl type="email" placeholder="E-mail"
-             name='email' onChange={this.handleChange} autoComplete="off"/>
+             name='email' onChange={this.handleChange} autoComplete="email"/>
           </Col>
         </FormGroup>
 
@@ -88,7 +88,7 @@ export default class RegistrationForm extends React.Component {
           </Col>
           <Col xs={8} sm={7}>
             <FormControl type="password" placeholder="Hasło (min. 6 znaków, w tym znaki specjalne)"
-             name='password' onChange={this.handleChange} autoComplete="off"/>
+             name='password' onChange={this.handleChange} autoComplete="new-password"/>
           </Col>
         </FormGroup>
 
