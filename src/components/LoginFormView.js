@@ -1,21 +1,7 @@
 import React from 'react'
 import {Form, FormGroup, FormControl, Col, ControlLabel, Button} from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
 import firebase from 'firebase'
-import authReducer from  '../state/parts/authReducer'
-
-
-// export default connect(
-//   state => ({
-//     user: state.user || null
-//   }),
-//   dispatch => ({
-//     login: () => dispatch({type: 'AUTH_USER'}),
-//     loguot: () => dispatch({type: 'AUTH_LOGOUT'}),
-//     failed: () => dispatch({type: 'UNAUTH_USER'})
-//   })
-// )(
 
 export default class LoginForm extends React.Component {
 
@@ -43,6 +29,23 @@ export default class LoginForm extends React.Component {
         console.log(error)
       }
     )
+
+    this.setState({
+      name: '',
+      email: '',
+      password: ''
+    });
+  }
+
+  handleGoogleLogIn = event => {
+
+    firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider()).then().catch();
+
+    this.setState({
+      name: '',
+      email: '',
+      password: ''
+    });
   }
 
   componentWillMount() {
@@ -98,6 +101,9 @@ export default class LoginForm extends React.Component {
                 Zaloguj
 
               </Button>
+              <Button onClick={this.handleGoogleLogIn}>
+                 Zaloguj przez konto Google
+              </Button>
               <Button type="submit">
                 <Link to={'/search'}>
                   Wyszukaj
@@ -131,4 +137,4 @@ export default class LoginForm extends React.Component {
     )
   }
 }
-// )
+

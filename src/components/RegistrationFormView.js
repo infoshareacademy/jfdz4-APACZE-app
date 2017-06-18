@@ -1,18 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import {Form, FormGroup, FormControl, Col, ControlLabel, Button} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import firebase from 'firebase'
-
-// export default connect(
-//   state => ({
-//     user: state.user || null
-//   }),
-//   dispatch => ({
-//     login: () => dispatch({type: 'AUTH_USER'}),
-//     failed: () => dispatch({type: 'UNAUTH_USER'})
-//   })
-// )(
 
 export default class RegistrationForm extends React.Component {
 
@@ -44,10 +33,6 @@ export default class RegistrationForm extends React.Component {
 
     //tutaj zapis w firebase
     firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
-      //po then logowanie
-      // .then(
-      //   firebase.auth().signInWithEmailAndPassword(this.state.email, this.state.password)
-      // )
       .then(
         //() => this.props.history.push('/search')
         () => this.props.history.push('/')
@@ -123,4 +108,4 @@ export default class RegistrationForm extends React.Component {
     )
   }
 }
-//)
+
