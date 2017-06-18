@@ -33,11 +33,11 @@ class LoginForm extends React.Component {
 
           <FormGroup>
             <Col xsOffset={2} smOffset={3} xs={8}>
-              <Button type="submit">
-                <Link to={'/search'}>
+              <Link to={'/search'}>
+                <Button type="submit">
                   Zaloguj
-                </Link>
-              </Button>
+                </Button>
+              </Link>
             </Col>
           </FormGroup>
 
