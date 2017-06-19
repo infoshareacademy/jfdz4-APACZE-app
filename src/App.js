@@ -1,21 +1,55 @@
-import React from 'react';
-import {
-  BrowserRouter as Router,
-  Route
-} from 'react-router-dom'
-import {
-  Grid
-} from 'react-bootstrap'
-import LoginForm from './LoginFormView'
-import SearchForm from './SearchForm'
+import React from 'react'
+import { Col, Row } from 'react-bootstrap'
+import firebase from 'firebase'
 
-const App = () => (
-      <Router>
-        <Grid>
-        <Route exact path="/" component={LoginForm}/>
-        <Route path="/search" component={SearchForm}/>
-        </Grid>
-      </Router>
-)
+import LoginForm from './components/LoginFormView'
 
-export default App;
+
+export default class App extends React.Component {
+
+  state = {
+    user: null
+  }
+
+  componentWillMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({
+          user: user
+        })
+      } else {
+        this.setState({
+          user: null
+        })
+      }
+    });
+  }
+
+  render() {
+
+    return (
+      <div>
+
+        <div>
+          <Row>
+          <Col smOffset={1} xs={2}></Col>
+          <Col xs={8} sm={7}>
+            {
+              this.state.user === null ?
+                null
+                :
+                <p>
+                  Użytkownik {this.state.user.email} jest zalogowany
+                  <button onClick={() => firebase.auth().signOut()}>
+                    Wyloguj
+                  </button>
+                </p>
+            }
+          </Col>
+          </Row>
+        </div>
+        <LoginForm/>
+      </div>
+    )
+  }
+}
