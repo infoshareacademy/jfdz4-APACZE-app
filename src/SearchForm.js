@@ -28,19 +28,20 @@ class SearchForm extends React.Component {
         "tripActivationDate":"2017-04-21",
         "stopActivationDate":"2017-06-13"
       }],
-      connections: [{
-        agencyId: 1,
-        endStopId: 102,
-        routeId: 110,
-        startStopId: 313,
-        tripId: 31
-      },{
-        agencyId: 1,
-        endStopId: 1309,
-        routeId: 195,
-        startStopId: 14557,
-        tripId: 11
-      }],
+      connections: [
+        {agencyId: 1,
+          endStopId: 102,
+          routeId: 110,
+          startStopId: 313,
+          tripId: 31
+        },
+        {agencyId: 1,
+          endStopId: 1118,
+          routeId: 195,
+          startStopId: 14557,
+          tripId: 11
+        }
+      ],
       stopTimes: [],
       searchResults: []
     }
@@ -119,7 +120,7 @@ class SearchForm extends React.Component {
       }
       allLines.push(oneLine)
       this.setState({
-        searchResults: this.state.searchResults.concat(allLines)
+        searchResults: allLines
       })
     }
   }
