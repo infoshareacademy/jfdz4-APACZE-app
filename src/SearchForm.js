@@ -28,7 +28,19 @@ class SearchForm extends React.Component {
         "tripActivationDate":"2017-04-21",
         "stopActivationDate":"2017-06-13"
       }],
-      connections: [],
+      connections: [{
+        agencyId: 1,
+        endStopId: 102,
+        routeId: 110,
+        startStopId: 313,
+        tripId: 31
+      },{
+        agencyId: 1,
+        endStopId: 1309,
+        routeId: 195,
+        startStopId: 14557,
+        tripId: 11
+      }],
       stopTimes: [],
       searchResults: []
     }
@@ -64,9 +76,9 @@ class SearchForm extends React.Component {
               "agencyId":a[i].agencyId
             }
           )
-          this.setState({connections: connections})
         }
       }
+      this.setState({connections: connections})
     }
   }
 
@@ -86,30 +98,31 @@ class SearchForm extends React.Component {
     }
   }
 
-  // handleSearchResults = () => {
-  //   const a = this.state.connections
-  //   const b = this.state.stopTimes
-  //   const result = []
-  //   for (var i = 0; i < a.length; i++) {
-  //     for (var j = 0; j < b.length; j++) {
-  //       if ((a[i].startStopId === b[j].stopId
-  //         && a[i].tripId === b[j].tripId) ||
-  //         (a[i].endStopId === b[j].stopId
-  //         && a[i].tripId === b[j].tripId)) {
-  //         result.push(
-  //           {
-  //             "routeId":a[i].routeId,
-  //             "tripId":a[i].tripId,
-  //             "startStopId":a[i].stopId,
-  //             "endStopId":b[j].stopId,
-  //             "agencyId":a[i].agencyId
-  //           }
-  //         )
-  //         this.setState({connections: connections})
-  //       }
-  //     }
-  //   }
-  // }
+  handleSearchResults = () => {
+    const a = this.state.connections
+    const b = this.state.stopTimes
+    const oneLine = []
+    const allLines =[]
+    for (var i = 0; i < a.length; i++) {
+      for (var j = 0; j < b.length; j++) {
+        if ((a[i].startStopId === b[j].stopId
+          && a[i].tripId === b[j].tripId) ||
+          (a[i].endStopId === b[j].stopId
+          && a[i].tripId === b[j].tripId)) {
+          oneLine.push(
+            {
+              "tripId":b[j].tripId,
+              "stopId":b[j].stopId
+            }
+          )
+        }
+      }
+      allLines.push(oneLine)
+      this.setState({
+        searchResults: this.state.searchResults.concat(allLines)
+      })
+    }
+  }
 
   render() {
     return (
@@ -124,6 +137,11 @@ class SearchForm extends React.Component {
           onClick={this.handleStopTimes}
         >
           handle stop times
+        </button>
+        <button
+          onClick={this.handleSearchResults}
+        >
+          handleSearchResults
         </button>
       </div>
     )
