@@ -29,7 +29,8 @@ class SearchForm extends React.Component {
         "stopActivationDate":"2017-06-13"
       }],
       connections: [],
-      stopTimes: []
+      stopTimes: [],
+      searchResults: []
     }
   }
 
@@ -78,12 +79,37 @@ class SearchForm extends React.Component {
       ).then(
         response => response.json().then(
           stopTimes => this.setState ({
-            stopTimes: stopTimes.stopTimes
+            stopTimes: this.state.stopTimes.concat(stopTimes.stopTimes)
           })
         )
       )
     }
   }
+
+  // handleSearchResults = () => {
+  //   const a = this.state.connections
+  //   const b = this.state.stopTimes
+  //   const result = []
+  //   for (var i = 0; i < a.length; i++) {
+  //     for (var j = 0; j < b.length; j++) {
+  //       if ((a[i].startStopId === b[j].stopId
+  //         && a[i].tripId === b[j].tripId) ||
+  //         (a[i].endStopId === b[j].stopId
+  //         && a[i].tripId === b[j].tripId)) {
+  //         result.push(
+  //           {
+  //             "routeId":a[i].routeId,
+  //             "tripId":a[i].tripId,
+  //             "startStopId":a[i].stopId,
+  //             "endStopId":b[j].stopId,
+  //             "agencyId":a[i].agencyId
+  //           }
+  //         )
+  //         this.setState({connections: connections})
+  //       }
+  //     }
+  //   }
+  // }
 
   render() {
     return (
