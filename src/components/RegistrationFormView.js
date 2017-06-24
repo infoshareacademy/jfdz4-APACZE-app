@@ -6,7 +6,7 @@ import firebase from 'firebase'
 // const svgCaptcha = require('svg-captcha');
 //
 // const captcha = svgCaptcha.create();
-// console.log(captcha);
+// console.log(captcha) ;
 
 export default class RegistrationForm extends React.Component {
 
