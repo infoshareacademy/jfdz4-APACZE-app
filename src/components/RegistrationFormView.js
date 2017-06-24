@@ -3,13 +3,18 @@ import {Form, FormGroup, FormControl, Col, ControlLabel, Button} from 'react-boo
 import {Link} from 'react-router-dom'
 import firebase from 'firebase'
 
+// const svgCaptcha = require('svg-captcha');
+//
+// const captcha = svgCaptcha.create();
+// console.log(captcha);
+
 export default class RegistrationForm extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
       email: '',
-      password: ''
+      password: '',
     }
   }
 
@@ -57,6 +62,7 @@ export default class RegistrationForm extends React.Component {
   };
 
   render() {
+
     return (
       <Form horizontal
         onSubmit={this.handleSubmit}
