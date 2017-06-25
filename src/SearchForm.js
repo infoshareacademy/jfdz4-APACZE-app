@@ -6,7 +6,7 @@ class SearchForm extends React.Component {
     this.state = {
       startBusStopId: 313,
       endBusStopId: 102,
-      date: "2017-06-23",
+      date: "2017-06-26",
       time: "04:50:00",
       stopsInTripsStart: [{
         "routeId": 110,
