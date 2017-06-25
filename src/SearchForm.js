@@ -5,42 +5,36 @@ class SearchForm extends React.Component {
     super(props);
     this.state = {
       startBusStopId: 313,
-      endBusStopId: 102,
+      endBusStopId: 1631,
       date: "2017-06-26",
-      time: "04:50:00",
-      stopsInTripsStart: [{
-        "routeId": 110,
-        "tripId": 31,
-        "stopId": 313,
-        "stopSequence": 0,
-        "agencyId": 1,
-        "topologyVersionId": 371,
-        "tripActivationDate": "2017-04-21",
-        "stopActivationDate": "2017-06-13"
-      }],
-      stopsInTripsEnd: [{
-        "routeId":110,
-        "tripId":31,
-        "stopId":102,
-        "stopSequence":16,
-        "agencyId":1,
-        "topologyVersionId":371,
-        "tripActivationDate":"2017-04-21",
-        "stopActivationDate":"2017-06-13"
-      }],
+      time: "12:40:00",
+      stopsInTripsStart: [],
+      stopsInTripsEnd: [],
       connections: [],
       stopTimes: [],
       searchResults: []
     }
   }
 
-  componentWillMount() {
+  handleStopsInTrips = () =>{
+    const date = this.state.date
+    const start = this.state.startBusStopId
+    const end = this.state.endBusStopId
     fetch(
-      ''
+      `https://crossorigin.me/http://89.71.187.219:22856/restApi/api/${date}/${start}`
     ).then(
       response => response.json().then(
-        busStops => this.setState ({
-          busStops
+        stopsInTripsStart => this.setState ({
+          stopsInTripsStart: stopsInTripsStart
+        })
+      )
+    );
+    fetch(
+      `https://crossorigin.me/http://89.71.187.219:22856/restApi/api/${date}/${end}`
+    ).then(
+      response => response.json().then(
+        stopsInTripsEnd => this.setState ({
+          stopsInTripsEnd: stopsInTripsEnd
         })
       )
     )
@@ -116,6 +110,11 @@ class SearchForm extends React.Component {
     return (
       <div>
         <p>hello</p>
+        <button
+          onClick={this.handleStopsInTrips}
+        >
+          stops in trips
+        </button>
         <button
           onClick={this.checkConnection}
         >
