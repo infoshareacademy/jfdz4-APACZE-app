@@ -1,4 +1,5 @@
 import React from 'react'
+import moment from 'moment'
 
 class SearchForm extends React.Component {
   constructor(props) {
@@ -59,40 +60,32 @@ class SearchForm extends React.Component {
   }
 
   handleStopTimes = () => {
-    const date = this.state.date
-    const route = this.state.chosenRoute[0]
     fetch(
-      `https://crossorigin.me/http://87.98.237.99:88/stopTimes?date=${date}&routeId=${route}`
+      `${process.env.PUBLIC_URL}/data/stopTimes${this.state.startBusStopId}.json`
     ).then(
       response => response.json().then(
         stopTimes => this.setState ({
-          stopTimes: stopTimes.stopTimes
+          stopTimes: stopTimes
         })
       )
     )
   }
 
   handleSearchResults = () => {
-    const a = this.state.stopTimes
-    const date = this.state.date
-    const route= this.state.chosenRoute
-    const oneLine = []
-    const allLines =[]
-    for (var i = 0; i < a.length; i++) {
-      if (a[i].stopId === this.state.startBusStopId) {
-        oneLine.push(
-          {
-            "tripId":a[i].tripId,
-            "stopId":a[i].stopId,
-            "sequence":a[i].stopSequence,
-            "depTime":a[i].departureTime
-          }
-        )
+    const stopTimes = this.state.stopTimes
+    const chosenRoute = this.state.chosenRoute
+    const route = stopTimes[chosenRoute]
+    const time = moment(this.state.time)
+    const result = []
+    for (let i = 0; i < route.length-1; i++) {
+      const departure = moment(route.departure)
+      if (departure.isSameOrAfter(time)) {
+        result.push(route)
+        return result
       }
     }
-    allLines.push(oneLine)
     this.setState({
-      searchResults: this.state.searchResults.concat(allLines)
+      searchResults: result
     })
   }
 

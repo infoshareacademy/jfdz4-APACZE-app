@@ -12,7 +12,6 @@ import SearchForm from './SearchForm'
 const App = () => (
       <Router>
         <Grid>
-        <Route exact path="/" component={LoginForm}/>
         <Route path="/search" component={SearchForm}/>
         </Grid>
       </Router>
