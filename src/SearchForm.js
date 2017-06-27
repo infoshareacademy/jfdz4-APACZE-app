@@ -6,7 +6,7 @@ class SearchForm extends React.Component {
     this.state = {
       startBusStopId: 313, //Wrzeszcz PKP
       endBusStopId: 31213, //Srebrzysko
-      date: "2017-06-27",
+      date: "2017-07-02",
       time: "12:40:00",
       stopsInTripsStart: [110,116,124,126,136,149,157,158],
       stopsInTripsEnd: [110,122,126,157,227],
@@ -73,31 +73,27 @@ class SearchForm extends React.Component {
   }
 
   handleSearchResults = () => {
-    const a = this.state.connections
-    const b = this.state.stopTimes
+    const a = this.state.stopTimes
+    const date = this.state.date
+    const route= this.state.chosenRoute
     const oneLine = []
     const allLines =[]
-    for (var i = 0; i < b.length; i++) {
-      for (var j = 0; j < a.length; j++) {
-        if ((b[i].stopId === this.state.startBusStopId
-          && b[i].routeId === a[j].routeId) ||
-          (b[i].stopId === this.state.endBusStopId
-          && b[i].routeId === a[j].routeId)) {
-          oneLine.push(
-            {
-              "tripId":b[i].tripId,
-              "stopId":b[i].stopId,
-              "sequence":b[i].stopSequence,
-              "depTime":b[i].departureTime
-            }
-          )
-        }
+    for (var i = 0; i < a.length; i++) {
+      if (a[i].stopId === this.state.startBusStopId) {
+        oneLine.push(
+          {
+            "tripId":a[i].tripId,
+            "stopId":a[i].stopId,
+            "sequence":a[i].stopSequence,
+            "depTime":a[i].departureTime
+          }
+        )
       }
-      allLines.push(oneLine)
-      this.setState({
-        searchResults: this.state.searchResults.concat(allLines)
-      })
     }
+    allLines.push(oneLine)
+    this.setState({
+      searchResults: this.state.searchResults.concat(allLines)
+    })
   }
 
   render() {
