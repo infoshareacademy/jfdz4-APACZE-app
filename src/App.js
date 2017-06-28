@@ -7,7 +7,7 @@ import {
   Grid
 } from 'react-bootstrap'
 import LoginForm from './LoginFormView'
-import SearchForm from './SearchForm'
+import SearchForm from './SearchForm2'
 
 const App = () => (
       <Router>
