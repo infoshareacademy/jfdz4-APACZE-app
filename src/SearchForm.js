@@ -53,11 +53,11 @@ class SearchForm extends React.Component {
 
   componentWillMount() {
     fetch(
-      'https://crossorigin.me/http://91.244.248.19/dataset/c24aa637-3619-4dc2-a171-a23eec8f2172/resource/4128329f-5adb-4082-b326-6e1aea7caddf/download/routes.json'
+      `${process.env.PUBLIC_URL}/data/stops.json`
     ).then(
       response => response.json().then(
         busStops => this.setState ({
-          busStops
+          busStops: busStops["stops"]
         })
       )
     )
@@ -96,30 +96,25 @@ class SearchForm extends React.Component {
                     this.state.busStops.filter(
                       busStop => this.state.startBusStopName === '' ? false :
                         (
-                          busStop.name.toLowerCase().includes(
+                          busStop.stopDesc.toLowerCase().includes(
                             this.state.startBusStopName.toLowerCase()
                           )
                         )
                     ).map(
                       busStop => (
                         <ListGroupItem
-                          key={busStop.id}
+                          key={busStop.stopId}
                           onClick={() => {
                             this.setState({
                               ...this.state,
-                              startBusStopId: busStop.id,
-                              startBusStopName: busStop.name,
-                              startBusStopLatitude: busStop.latitude,
-                              startBusStopLongtitude: busStop.longtitude,
+                              startBusStopId: busStop.stopId,
+                              startBusStopName: busStop.stopDesc,
                               showStartBusStopList: false
                             })
                           }
                           }
                         >
-                          id_{busStop.id}_
-                          name_{busStop.name}_
-                          latitude_{busStop.latitude}_
-                          longtitude_{busStop.longtitude}_
+                          {busStop.stopDesc}
                         </ListGroupItem>
                       )
                     )
@@ -154,30 +149,25 @@ class SearchForm extends React.Component {
                     this.state.busStops.filter(
                       busStop => this.state.endBusStopName === '' ? false :
                         (
-                          busStop.name.toLowerCase().includes(
+                          busStop.stopDesc.toLowerCase().includes(
                             this.state.endBusStopName.toLowerCase()
                           )
                         )
                     ).map(
                       busStop => (
                         <ListGroupItem
-                          key={busStop.id}
+                          key={busStop.stopId}
                           onClick={() => {
                             this.setState({
                               ...this.state,
-                              endBusStopId: busStop.id,
-                              endBusStopName: busStop.name,
-                              endBusStopLatitude: busStop.latitude,
-                              endBusStopLongtitude: busStop.longtitude,
+                              endBusStopId: busStop.stopId,
+                              endBusStopName: busStop.stopDesc,
                               showEndBusStopList: false
                             })
                           }
                           }
                         >
-                          id_{busStop.id}_
-                          name_{busStop.name}_
-                          latitude_{busStop.latitude}_
-                          longtitude_{busStop.longtitude}_
+                          {busStop.stopDesc}
                         </ListGroupItem>
                       )
                     )
