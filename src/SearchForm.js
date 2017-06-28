@@ -8,7 +8,7 @@ class SearchForm extends React.Component {
       startBusStopId: 313, //Wrzeszcz PKP
       endBusStopId: 31213, //Srebrzysko
       date: "2017-07-02",
-      time: "12:40:00",
+      time: "2017-07-02T12:50:00",
       stopsInTripsStart: [110,116,124,126,136,149,157,158],
       stopsInTripsEnd: [110,122,126,157,227],
       connections: [],
@@ -75,13 +75,12 @@ class SearchForm extends React.Component {
     const stopTimes = this.state.stopTimes
     const chosenRoute = this.state.chosenRoute
     const route = stopTimes[chosenRoute]
-    const time = moment(this.state.time)
+    const time = this.state.time
     const result = []
-    for (let i = 0; i < route.length-1; i++) {
-      const departure = moment(route.departure)
-      if (departure.isSameOrAfter(time)) {
-        result.push(route)
-        return result
+    for (let i = 0; i < route.length; i++) {
+      const departure = route[i].departure
+      if (moment(departure).isSameOrAfter(time)) {
+        result.push(route[i])
       }
     }
     this.setState({
