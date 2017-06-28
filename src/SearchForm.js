@@ -120,12 +120,11 @@ class SearchForm extends React.Component {
     const stopTimes = this.state.stopTimes
     const chosenRoute = this.state.chosenRoute
     const route = stopTimes[chosenRoute]
-    console.log(route)
-    const time = moment(this.state.time)
+    const time = this.state.time
     const result = []
-    for (let i = 0; i < route.length-1; i++) {
-      const departure = moment(route.departure)
-      if (departure.isSameOrAfter(time)) {
+    for (let i = 0; i < route.length; i++) {
+      const departure = route[i].departure
+      if (moment(departure).isSameOrAfter(time)) {
         result.push(route[i])
       }
     }
