@@ -1,43 +1,43 @@
 {
   "110": [
     {
-      "departure": "12:43:00",
+      "departure": "2017-07-02T12:43:00",
       "nextStops": [{"stopId": 1383,"departure": "12:46:00"},{"stopId": 1923,"departure": "12:48:00"},{"stopId": 1925,"departure": "12:49:00"}]
     },
     {
-      "departure": "13:13:00",
+      "departure": "2017-07-02T13:13:00",
       "nextStops": [{"stopId": 1383,"departure": "13:16:00"},{"stopId": 1923, "departure": "13:18:00"},{"stopId": 1925,"departure": "13:19:00"}]
     },
     {
-      "departure": "13:43:00",
+      "departure": "2017-07-02T13:43:00",
       "nextStops": [{"stopId": 1383,"departure": "13:46:00"},{"stopId": 1923,"departure": "13:48:00"},{"stopId": 1925,"departure": "13:49:00"}]
     }
   ],
   "126": [
     {
-      "departure": "13:28:00",
+      "departure": "2017-07-02T13:28:00",
       "nextStops": [{"stopId": 1383,"departure": "13:31:00"},{"stopId": 1923,"departure": "13:33:00"},{"stopId": 1925,"departure": "13:34:00"}]
     },
     {
-      "departure": "14:28:00",
+      "departure": "2017-07-02T14:28:00",
       "nextStops": [{"stopId": 1383,"departure": "14:31:00"},{"stopId": 1923,"departure": "14:33:00"},{"stopId": 1925,"departure": "14:34:00"}]
     },
     {
-      "departure": "15:28:00",
+      "departure": "2017-07-02T15:28:00",
       "nextStops": [{"stopId": 1383,"departure": "15:31:00"},{"stopId": 1923,"departure": "15:33:00"},{"stopId": 1925,"departure": "15:34:00"}]
     }
   ],
   "157": [
     {
-      "departure": "12:58:00",
+      "departure": "2017-07-02T12:58:00",
       "nextStops": [{"stopId": 1383,"departure": "13:01:00"},{"stopId": 1923,"departure": "13:03:00"},{"stopId": 1925,"departure": "13:04:00"}]
     },
     {
-      "departure": "13:58:00",
+      "departure": "2017-07-02T13:58:00",
       "nextStops": [{"stopId": 1383,"departure": "14:01:00"},{"stopId": 1923,"departure": "14:03:00"},{"stopId": 1925,"departure": "14:04:00"}]
     },
     {
-      "departure": "14:58:00",
+      "departure": "2017-07-02T14:58:00",
       "nextStops": [{"stopId": 1383,"departure": "15:01:00"},{"stopId": 1923,"departure": "15:03:00"},{"stopId": 1925,"departure": "15:04:00"}]
     }
   ]
