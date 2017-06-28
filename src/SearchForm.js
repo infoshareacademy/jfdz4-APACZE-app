@@ -39,8 +39,11 @@ class SearchForm extends React.Component {
       endBusStopLatitude: '',
       endBusStopLongtitude: '',
       date: moment(),
+      time: "2017-07-02T12:40:00",
       startEnd: '',
-      connectionExists: null
+      connections: [],
+      chosenRoute: [],
+      stopTimes: [],
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -61,9 +64,18 @@ class SearchForm extends React.Component {
         })
       )
     )
+    fetch(
+      `${process.env.PUBLIC_URL}/data/stopTimes.json`
+    ).then(
+      response => response.json().then(
+        stopTimes => this.setState ({
+          stopTimes: stopTimes
+        })
+      )
+    )
   }
 
-  handleStopsInTrips = () =>{
+  handleStopsInTrips = () => {
     const start = this.state.startBusStopId
     const end = this.state.endBusStopId
     fetch(
@@ -84,6 +96,45 @@ class SearchForm extends React.Component {
         })
       )
     )
+  }
+
+  checkConnection = () => {
+    const a = this.state.stopsInTripsStart
+    const b = this.state.stopsInTripsEnd
+    const connections = []
+    for (var i = 0; i < a.length; i++) {
+      for (var j = 0; j < b.length; j++) {
+        if (a[i] === b[j]) {
+          connections.push(
+            {
+              "routeId":a[i]
+            }
+          )
+        }
+      }
+      this.setState({connections: connections})
+    }
+  }
+
+  handleSearchResults = () => {
+    const stopTimes = this.state.stopTimes
+    const chosenRoute = this.state.chosenRoute
+    const route = stopTimes[chosenRoute]
+    console.log(route)
+    const time = moment(this.state.time)
+    const result = []
+    for (let i = 0; i < route.length-1; i++) {
+      const departure = moment(route.departure)
+      if (departure.isSameOrAfter(time)) {
+        result.push(route)
+        return result
+      }
+      console.log(result)
+    }
+    console.log(result)
+    this.setState({
+      searchResults: result
+    })
   }
 
   render() {
@@ -277,14 +328,46 @@ class SearchForm extends React.Component {
             type="submit"
             onClick={this.handleStopsInTrips}
           >
-            Szukaj połączenia
+            1
           </Button>
-          <p>{this.state.connectionExists}</p>
-          <Link to={'/'}>
-            <Button type="submit">
-              Powrót do logowania
-            </Button>
-          </Link>
+          <Button
+            type="submit"
+            onClick={this.checkConnection}
+          >
+            2
+          </Button>
+          <Button
+            type="submit"
+            onClick={this.handleSearchResults}
+          >
+            4
+          </Button>
+          <ListGroup
+            style={
+              this.state.connections === false ?
+                styles.hidden :
+                styles.base
+            }
+          >
+            {
+              this.state.connections === null ?
+              'No bus stops' : this.state.connections.map((number, index) => (
+                    <ListGroupItem
+                      key={index}
+                      onClick={() => {
+                        this.setState({
+                          ...this.state,
+                          chosenRoute: number.routeId
+                        })
+                      }
+                      }
+                    >
+                      {number.routeId}
+                    </ListGroupItem>
+                  )
+                )
+            }
+          </ListGroup>
         </Col>
       </div>
     )
