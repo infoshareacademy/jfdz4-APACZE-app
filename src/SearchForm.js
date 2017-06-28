@@ -63,6 +63,29 @@ class SearchForm extends React.Component {
     )
   }
 
+  handleStopsInTrips = () =>{
+    const start = this.state.startBusStopId
+    const end = this.state.endBusStopId
+    fetch(
+      `${process.env.PUBLIC_URL}/data/stopsWithRoutes.json`
+    ).then(
+      response => response.json().then(
+        stopsWithRoutes => this.setState ({
+          stopsInTripsStart: stopsWithRoutes[start]
+        })
+      )
+    );
+    fetch(
+      `${process.env.PUBLIC_URL}/data/stopsWithRoutes.json`
+    ).then(
+      response => response.json().then(
+        stopsWithRoutes => this.setState ({
+          stopsInTripsEnd: stopsWithRoutes[end]
+        })
+      )
+    )
+  }
+
   render() {
     return (
       <div>
@@ -252,6 +275,7 @@ class SearchForm extends React.Component {
           </FormGroup>
           <Button
             type="submit"
+            onClick={this.handleStopsInTrips}
           >
             Szukaj połączenia
           </Button>
