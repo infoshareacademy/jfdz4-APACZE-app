@@ -2,6 +2,7 @@ import React from 'react'
 import {Form, FormGroup, FormControl, Col, ControlLabel, Button} from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import firebase from 'firebase'
+import './LoginForm.css'
 
 export default class LoginForm extends React.Component {
 
@@ -111,9 +112,7 @@ export default class LoginForm extends React.Component {
           <FormGroup>
             <Col xsOffset={2} smOffset={3} xs={8}>
               <Button type="submit" className="btn btn-primary">
-
                 Zaloguj
-
               </Button>
               <Button onClick={this.handleGoogleLogIn}>
                  Zaloguj przez konto Google
@@ -128,22 +127,6 @@ export default class LoginForm extends React.Component {
                   Zarejestruj
                 </Link>
               </Button>
-
-
-              {
-                this.state.user === null ?
-                  null
-                  :
-                  this.state.user.email === 'aniahb@gmail.com' ?
-                    <Button type="submit">
-                      <Link to={'/users'}>
-                        Użytkownicy
-                      </Link>
-                    </Button>
-                    :
-                    null
-               }              
-
             </Col>
           </FormGroup>
         </Form>

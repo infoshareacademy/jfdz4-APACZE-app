@@ -9,6 +9,7 @@
     "form-schema-validation": "^1.6.0",
     "moment": "^2.18.1",
     "moment-timezone": "^0.5.13",
+    "rc-menu": "^5.0.10",
     "react": "^15.5.4",
     "react-bootstrap": "^0.31.0",
     "react-datepicker": "^0.47.0",

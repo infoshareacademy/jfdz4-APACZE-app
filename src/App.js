@@ -3,7 +3,8 @@ import { Col, Row } from 'react-bootstrap'
 import firebase from 'firebase'
 
 import LoginForm from './components/LoginFormView'
-
+import SearchForm from './SearchForm'
+import MenuForm from './components/MenuFormView'
 
 export default class App extends React.Component {
 
@@ -29,26 +30,26 @@ export default class App extends React.Component {
 
     return (
       <div>
-
         <div>
           <Row>
           <Col smOffset={1} xs={2}></Col>
           <Col xs={8} sm={7}>
             {
               this.state.user === null ?
-                null
+                <LoginForm/>
                 :
-                <p>
-                  Użytkownik {this.state.user.email} jest zalogowany
-                  <button onClick={() => firebase.auth().signOut()}>
-                    Wyloguj
-                  </button>
-                </p>
+                <div>
+                  <div style={{padding: '20px 20px', backgroundColor: '#B54328',
+                    color: 'white', textAlign: 'right'}}>
+                    Zalogowany użytkownik: {this.state.user.email}
+                  </div>
+                  <MenuForm/>
+                  <SearchForm/>
+                </div>
             }
           </Col>
           </Row>
         </div>
-        <LoginForm/>
       </div>
     )
   }
