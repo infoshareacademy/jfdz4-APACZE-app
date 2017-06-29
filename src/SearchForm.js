@@ -29,6 +29,7 @@ class SearchForm extends React.Component {
     this.state = {
       showStartBusStopList: false,
       showEndBusStopList: false,
+      showConnections: false,
       busStops: null,
       startBusStopId: '',
       startBusStopName: '',
@@ -328,7 +329,12 @@ class SearchForm extends React.Component {
           </Button>
           <Button
             type="submit"
-            onClick={this.checkConnection}
+            onClick={() => {
+              this.checkConnection();
+              this.setState({
+                showConnections: true
+              })
+            }}
           >
             2
           </Button>
@@ -336,11 +342,11 @@ class SearchForm extends React.Component {
             type="submit"
             onClick={this.handleSearchResults}
           >
-            4
+            3
           </Button>
           <ListGroup
             style={
-              this.state.connections === false ?
+              this.state.showConnections === false ?
                 styles.hidden :
                 styles.base
             }
@@ -353,7 +359,8 @@ class SearchForm extends React.Component {
                       onClick={() => {
                         this.setState({
                           ...this.state,
-                          chosenRoute: number.routeId
+                          chosenRoute: number.routeId,
+                          showConnections: false
                         })
                       }
                       }
