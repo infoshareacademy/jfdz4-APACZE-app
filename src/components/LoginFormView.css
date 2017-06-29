@@ -1,0 +1,17 @@
+.form-control {
+    border-style: hidden hidden solid hidden;
+    border-color: #B54328;
+}
+.btn-primary {
+    background-color: #B54328;
+}
+
+.btn-default {
+    background-color: #7C7B80;
+    border-color: #B54328;
+}
+
+.controls-wrapper {
+    margin: 50px;
+    border: solid #B54328;
+}
