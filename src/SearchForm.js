@@ -133,8 +133,7 @@ class SearchForm extends React.Component {
     const result = []
     for (let i = 0; i < route.length; i++) {
       const departure = route[i].departure
-      if (moment(departure).isSameOrAfter(time) &&
-        moment(departure, "YYYY-MM-DD").isSame(time, "YYYY-MM-DD")) {
+      if (moment(departure).isSameOrAfter(time)) {
         result.push(route[i])
       }
     }
