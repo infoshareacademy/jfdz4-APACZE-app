@@ -30,6 +30,8 @@ class SearchForm extends React.Component {
       showStartBusStopList: false,
       showEndBusStopList: false,
       showConnections: false,
+      showTrips: false,
+      showTripDetails: false,
       busStops: null,
       startBusStopId: '',
       startBusStopName: '',
@@ -45,6 +47,8 @@ class SearchForm extends React.Component {
       connections: [],
       chosenRoute: [],
       stopTimes: [],
+      searchResults: [],
+      chosenTripDetails: []
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -94,7 +98,7 @@ class SearchForm extends React.Component {
       response => response.json().then(
         stopsWithRoutes => this.setState ({
           stopsInTripsEnd: stopsWithRoutes[end]
-        })
+        }, this.checkConnection)
       )
     )
   }
@@ -113,7 +117,11 @@ class SearchForm extends React.Component {
           )
         }
       }
-      this.setState({connections: connections})
+      this.setState({
+        ...this.state,
+        connections: connections,
+        showConnections: true
+      })
     }
   }
 
@@ -121,16 +129,19 @@ class SearchForm extends React.Component {
     const stopTimes = this.state.stopTimes
     const chosenRoute = this.state.chosenRoute
     const route = stopTimes[chosenRoute]
-    const time = this.state.time
+    const time = this.state.date
     const result = []
     for (let i = 0; i < route.length; i++) {
       const departure = route[i].departure
-      if (moment(departure).isSameOrAfter(time)) {
+      if (moment(departure).isSameOrAfter(time) &&
+        moment(departure, "YYYY-MM-DD").isSame(time, "YYYY-MM-DD")) {
         result.push(route[i])
       }
     }
     this.setState({
-      searchResults: result
+      ...this.state,
+      searchResults: result,
+      showTrips: true
     })
   }
 
@@ -290,59 +301,12 @@ class SearchForm extends React.Component {
               mm &darr;
             </Button>
           </ButtonToolbar>
-          <FormGroup>
-            <Radio name="radioGroup"
-                   inline
-                   onClick={ this.state.startEnd === 0 ?
-                     false :
-                     () => {
-                       this.setState({
-                         ...this.state,
-                         startEnd: 0
-                       })
-                     }
-                   }
-            >
-              Odjazd
-            </Radio>
-            {' '}
-            <Radio name="radioGroup"
-                   inline
-                   onClick={ this.state.startEnd === 1 ?
-                     false :
-                     () => {
-                       this.setState({
-                         ...this.state,
-                         startEnd: 1
-                       })
-                     }
-                   }
-            >
-              Przyjazd
-            </Radio>
-          </FormGroup>
+
           <Button
             type="submit"
             onClick={this.handleStopsInTrips}
           >
-            1
-          </Button>
-          <Button
-            type="submit"
-            onClick={() => {
-              this.checkConnection();
-              this.setState({
-                showConnections: true
-              })
-            }}
-          >
-            2
-          </Button>
-          <Button
-            type="submit"
-            onClick={this.handleSearchResults}
-          >
-            3
+            Szukaj połączenia
           </Button>
           <ListGroup
             style={
@@ -361,11 +325,62 @@ class SearchForm extends React.Component {
                           ...this.state,
                           chosenRoute: number.routeId,
                           showConnections: false
-                        })
+                        }, this.handleSearchResults)
                       }
                       }
                     >
                       {number.routeId}
+                    </ListGroupItem>
+                  )
+                )
+            }
+          </ListGroup>
+          <ListGroup
+            style={
+              this.state.showTrips === false ?
+                styles.hidden :
+                styles.base
+            }
+          >
+            {
+              this.state.searchResults === null ?
+              'No bus stops' : this.state.searchResults.map((number, index) => (
+                    <ListGroupItem
+                      key={index}
+                      onClick={() => {
+                        this.setState({
+                          ...this.state,
+                          showTripDetails: true,
+                          chosenTripDetails: number.nextStops
+                        })
+                      }}
+                      onBlur={() => {
+                        this.setState({
+                          ...this.state,
+                          showTrips: false
+                        })
+                      }
+                      }
+                    >
+                      {this.state.chosenRoute + " " + moment(number.departure).format("HH:mm:ss")}
+                      <ul
+                        style={
+                          this.state.showTripDetails === false ?
+                            styles.hidden :
+                            styles.base
+                        }
+                      >{
+                        this.state.chosenTripDetails === null ?
+                          'No bus stops' : this.state.chosenTripDetails.map((number, index) => (
+                              <li
+                                key={index}
+                              >
+                                {number}
+                              </li>
+                            )
+                          )
+                      }
+                      </ul>
                     </ListGroupItem>
                   )
                 )
