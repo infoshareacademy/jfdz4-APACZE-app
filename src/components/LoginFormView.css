@@ -1,6 +1,5 @@
 .form-control {
-    border-style: hidden hidden solid hidden;
-    border-color: #B54328;
+    border: 6px solid #B54328;
 }
 .btn-primary {
     background-color: #B54328;
