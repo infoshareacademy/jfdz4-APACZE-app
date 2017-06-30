@@ -357,19 +357,19 @@ class SearchForm extends React.Component {
           >
             {
               this.state.connections === null ?
-              'No bus stops' : this.state.connections.map((number, index) => (
+              'No bus stops' : this.state.connections.map((connection, index) => (
                     <ListGroupItem
                       key={index}
                       onClick={() => {
                         this.setState({
                           ...this.state,
-                          chosenRoute: number.routeId,
+                          chosenRoute: connection.routeId,
                           showConnections: false
                         }, this.handleSearchResults)
                       }
                       }
                     >
-                      {number.routeId}
+                      {connection.routeId}
                     </ListGroupItem>
                   )
                 )
@@ -384,20 +384,20 @@ class SearchForm extends React.Component {
           >
             {
               this.state.searchResults === null ?
-              'No bus stops' : this.state.searchResults.map((number, index) => (
+              'No bus stops' : this.state.searchResults.map((route, index) => (
                     <ListGroupItem
                       key={index}
                       onClick={() => {
                         this.setState({
                           ...this.state,
                           showTripDetails: true,
-                          chosenTripDetails: number.nextStops,
+                          chosenTripDetails: route.nextStops,
                           origin: new google.maps.LatLng(this.state.startBusStopLatitude, this.state.startBusStopLongtitude),
                           destination: new google.maps.LatLng(this.state.endBusStopLatitude, this.state.endBusStopLongtitude)
                         }, this.setMap)
                       }}
                     >
-                      {this.state.chosenRoute + " " + moment(number.departure).format("HH:mm")}
+                      {this.state.chosenRoute + " " + moment(route.departure).format("HH:mm")}
                       <ul
                         style={
                           this.state.showTripDetails === false ?
@@ -406,11 +406,11 @@ class SearchForm extends React.Component {
                         }
                       >{
                         this.state.chosenTripDetails === null ?
-                          'No bus stops' : this.state.chosenTripDetails.map((number, index) => (
+                          'No bus stops' : this.state.chosenTripDetails.map((routeStops, index) => (
                               <li
                                 key={index}
                               >
-                                {number}
+                                {routeStops}
                               </li>
                             )
                           )
