@@ -29,6 +29,9 @@ class SearchForm extends React.Component {
     this.state = {
       showStartBusStopList: false,
       showEndBusStopList: false,
+      showConnections: false,
+      showTrips: false,
+      showTripDetails: false,
       busStops: null,
       startBusStopId: '',
       startBusStopName: '',
@@ -39,7 +42,13 @@ class SearchForm extends React.Component {
       endBusStopLatitude: '',
       endBusStopLongtitude: '',
       date: moment(),
-      startEnd: ''
+      time: "2017-07-02T12:40:00",
+      startEnd: '',
+      connections: [],
+      chosenRoute: [],
+      stopTimes: [],
+      searchResults: [],
+      chosenTripDetails: []
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -52,14 +61,87 @@ class SearchForm extends React.Component {
 
   componentWillMount() {
     fetch(
-      `${process.env.PUBLIC_URL}/data/busStops.json`
+      `${process.env.PUBLIC_URL}/data/stops.json`
     ).then(
       response => response.json().then(
         busStops => this.setState ({
-          busStops
+          busStops: busStops["stops"]
         })
       )
     )
+    fetch(
+      `${process.env.PUBLIC_URL}/data/stopTimes.json`
+    ).then(
+      response => response.json().then(
+        stopTimes => this.setState ({
+          stopTimes: stopTimes
+        })
+      )
+    )
+  }
+
+  handleStopsInTrips = () => {
+    const start = this.state.startBusStopId
+    const end = this.state.endBusStopId
+    fetch(
+      `${process.env.PUBLIC_URL}/data/stopsWithRoutes.json`
+    ).then(
+      response => response.json().then(
+        stopsWithRoutes => this.setState ({
+          stopsInTripsStart: stopsWithRoutes[start]
+        })
+      )
+    );
+    fetch(
+      `${process.env.PUBLIC_URL}/data/stopsWithRoutes.json`
+    ).then(
+      response => response.json().then(
+        stopsWithRoutes => this.setState ({
+          stopsInTripsEnd: stopsWithRoutes[end]
+        }, this.checkConnection)
+      )
+    )
+  }
+
+  checkConnection = () => {
+    const a = this.state.stopsInTripsStart
+    const b = this.state.stopsInTripsEnd
+    const connections = []
+    for (var i = 0; i < a.length; i++) {
+      for (var j = 0; j < b.length; j++) {
+        if (a[i] === b[j]) {
+          connections.push(
+            {
+              "routeId":a[i]
+            }
+          )
+        }
+      }
+      this.setState({
+        ...this.state,
+        connections: connections,
+        showConnections: true
+      })
+    }
+  }
+
+  handleSearchResults = () => {
+    const stopTimes = this.state.stopTimes
+    const chosenRoute = this.state.chosenRoute
+    const route = stopTimes[chosenRoute]
+    const time = this.state.date
+    const result = []
+    for (let i = 0; i < route.length; i++) {
+      const departure = route[i].departure
+      if (moment(departure).isSameOrAfter(time)) {
+        result.push(route[i])
+      }
+    }
+    this.setState({
+      ...this.state,
+      searchResults: result,
+      showTrips: true
+    })
   }
 
   render() {
@@ -95,30 +177,25 @@ class SearchForm extends React.Component {
                     this.state.busStops.filter(
                       busStop => this.state.startBusStopName === '' ? false :
                         (
-                          busStop.name.toLowerCase().includes(
+                          busStop.stopDesc.toLowerCase().includes(
                             this.state.startBusStopName.toLowerCase()
                           )
                         )
                     ).map(
                       busStop => (
                         <ListGroupItem
-                          key={busStop.id}
+                          key={busStop.stopId}
                           onClick={() => {
                             this.setState({
                               ...this.state,
-                              startBusStopId: busStop.id,
-                              startBusStopName: busStop.name,
-                              startBusStopLatitude: busStop.latitude,
-                              startBusStopLongtitude: busStop.longtitude,
+                              startBusStopId: busStop.stopId,
+                              startBusStopName: busStop.stopDesc,
                               showStartBusStopList: false
                             })
                           }
                           }
                         >
-                          id_{busStop.id}_
-                          name_{busStop.name}_
-                          latitude_{busStop.latitude}_
-                          longtitude_{busStop.longtitude}_
+                          {busStop.stopDesc}
                         </ListGroupItem>
                       )
                     )
@@ -153,30 +230,25 @@ class SearchForm extends React.Component {
                     this.state.busStops.filter(
                       busStop => this.state.endBusStopName === '' ? false :
                         (
-                          busStop.name.toLowerCase().includes(
+                          busStop.stopDesc.toLowerCase().includes(
                             this.state.endBusStopName.toLowerCase()
                           )
                         )
                     ).map(
                       busStop => (
                         <ListGroupItem
-                          key={busStop.id}
+                          key={busStop.stopId}
                           onClick={() => {
                             this.setState({
                               ...this.state,
-                              endBusStopId: busStop.id,
-                              endBusStopName: busStop.name,
-                              endBusStopLatitude: busStop.latitude,
-                              endBusStopLongtitude: busStop.longtitude,
+                              endBusStopId: busStop.stopId,
+                              endBusStopName: busStop.stopDesc,
                               showEndBusStopList: false
                             })
                           }
                           }
                         >
-                          id_{busStop.id}_
-                          name_{busStop.name}_
-                          latitude_{busStop.latitude}_
-                          longtitude_{busStop.longtitude}_
+                          {busStop.stopDesc}
                         </ListGroupItem>
                       )
                     )
@@ -228,46 +300,92 @@ class SearchForm extends React.Component {
               mm &darr;
             </Button>
           </ButtonToolbar>
-          <FormGroup>
-            <Radio name="radioGroup"
-                   inline
-                   onClick={ this.state.startEnd === 0 ?
-                     false :
-                     () => {
-                       this.setState({
-                         ...this.state,
-                         startEnd: 0
-                       })
-                     }
-                   }
-            >
-              Odjazd
-            </Radio>
-            {' '}
-            <Radio name="radioGroup"
-                   inline
-                   onClick={ this.state.startEnd === 1 ?
-                     false :
-                     () => {
-                       this.setState({
-                         ...this.state,
-                         startEnd: 1
-                       })
-                     }
-                   }
-            >
-              Przyjazd
-            </Radio>
-          </FormGroup>
-          <Button type="submit">
+
+          <Button
+            type="submit"
+            onClick={this.handleStopsInTrips}
+          >
             Szukaj połączenia
           </Button>
+          <ListGroup
+            style={
+              this.state.showConnections === false ?
+                styles.hidden :
+                styles.base
+            }
+          >
+            {
+              this.state.connections === null ?
+              'No bus stops' : this.state.connections.map((number, index) => (
+                    <ListGroupItem
+                      key={index}
+                      onClick={() => {
+                        this.setState({
+                          ...this.state,
+                          chosenRoute: number.routeId,
+                          showConnections: false
+                        }, this.handleSearchResults)
+                      }
+                      }
+                    >
+                      {number.routeId}
+                    </ListGroupItem>
+                  )
+                )
+            }
+          </ListGroup>
+          <ListGroup
+            style={
+              this.state.showTrips === false ?
+                styles.hidden :
+                styles.base
+            }
+          >
+            {
+              this.state.searchResults === null ?
+              'No bus stops' : this.state.searchResults.map((number, index) => (
+                    <ListGroupItem
+                      key={index}
+                      onClick={() => {
+                        this.setState({
+                          ...this.state,
+                          showTripDetails: true,
+                          chosenTripDetails: number.nextStops
+                        })
+                      }}
+                      onBlur={() => {
+                        this.setState({
+                          ...this.state,
+                          showTrips: false
+                        })
+                      }
+                      }
+                    >
+                      {this.state.chosenRoute + " " + moment(number.departure).format("HH:mm:ss")}
+                      <ul
+                        style={
+                          this.state.showTripDetails === false ?
+                            styles.hidden :
+                            styles.base
+                        }
+                      >{
+                        this.state.chosenTripDetails === null ?
+                          'No bus stops' : this.state.chosenTripDetails.map((number, index) => (
+                              <li
+                                key={index}
+                              >
+                                {number}
+                              </li>
+                            )
+                          )
+                      }
+                      </ul>
+                    </ListGroupItem>
+                  )
+                )
+            }
+          </ListGroup>
         </Col>
-        <Link to={'/'}>
-          <Button type="submit">
-            Powrót do logowania
-          </Button>
-        </Link>
       </div>
     )
   }
