@@ -2,6 +2,12 @@ import React from 'react'
 import {Form, FormGroup, FormControl, Col, ControlLabel, Button} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import firebase from 'firebase'
+import './RegistrationForm.css'
+
+// const svgCaptcha = require('svg-captcha');
+//
+// const captcha = svgCaptcha.create();
+// console.log(captcha);
 
 export default class RegistrationForm extends React.Component {
 
@@ -9,7 +15,7 @@ export default class RegistrationForm extends React.Component {
     super(props);
     this.state = {
       email: '',
-      password: ''
+      password: '',
     }
   }
 
@@ -57,10 +63,12 @@ export default class RegistrationForm extends React.Component {
   };
 
   render() {
+
     return (
       <Form horizontal
         onSubmit={this.handleSubmit}
         onError={(errors, data) => console.log('error', errors, data)}
+        className="regForm"
       >
 
         <FormGroup>
@@ -93,14 +101,16 @@ export default class RegistrationForm extends React.Component {
 
         <FormGroup>
           <Col xsOffset={2} smOffset={3} xs={8}>
-            <Button type="submit" className="btn btn-primary">
-              Zarejestruj
-            </Button>
-            <Button>
-              <Link to={'/'}>
-                Powrót do logowania
-              </Link>
-            </Button>
+            <div>
+              <Button type="submit" className="btn btn-primary">
+                Zarejestruj
+              </Button>
+              <Button style={ {marginLeft: '10px'} }>
+                <Link to={'/'}>
+                  Powrót do logowania
+                </Link>
+              </Button>
+            </div>
           </Col>
         </FormGroup>
       </Form>
