@@ -395,7 +395,7 @@ class SearchForm extends React.Component {
                         }, this.setMap)
                       }}
                     >
-                      {this.state.chosenRoute + " " + moment(number.departure).format("HH:mm:ss")}
+                      {this.state.chosenRoute + " " + moment(number.departure).format("HH:mm")}
                       <ul
                         style={
                           this.state.showTripDetails === false ?
