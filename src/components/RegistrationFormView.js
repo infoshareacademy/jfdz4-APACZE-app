@@ -99,7 +99,7 @@ export default class RegistrationForm extends React.Component {
 
         <FormGroup>
           <Col xsOffset={2} smOffset={3} xs={8}>
-            <Button type="submit" className="btn btn-primary">
+            <Button type="submit" className="login-btn login-btn-primary">
               Zarejestruj
             </Button>
             <Button>

@@ -1,16 +1,33 @@
-.form-control {
-    border: 6px solid #B54328;
+.login-controls-wrapper {
+    margin: 50px;
 }
-.btn-primary {
+
+.login-form-control {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    border: 0;
+    border-bottom: 3px #B54328 solid;
+}
+
+.login-google-button.btn.btn-default {
+    display: block;
+    margin: 0 auto;
     background-color: #B54328;
 }
 
-.btn-default {
-    background-color: #7C7B80;
-    border-color: #B54328;
+.login-form-or {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-.controls-wrapper {
-    margin: 50px;
-    border: solid #B54328;
+.login-btn-primary.btn.btn-default {
+    background-color: #B54328;
+    margin-right: 10px;
 }
+
+
+
