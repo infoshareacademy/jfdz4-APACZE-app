@@ -17,7 +17,9 @@ import {
   DirectionsRenderer
 } from 'react-google-maps'
 
-import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+import 'react-datepicker/dist/react-datepicker-cssmodules.css'
+
+import './SearchForm.css'
 
 const styles = {
   base: {},
