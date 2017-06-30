@@ -6,13 +6,16 @@ import {
   Button,
   ButtonToolbar,
   InputGroup,
-  Radio,
   ListGroup,
   ListGroupItem
 } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
 import DatePicker from 'react-datepicker'
 import moment from 'moment'
+import {
+  withGoogleMap,
+  GoogleMap,
+  DirectionsRenderer
+} from 'react-google-maps'
 
 import 'react-datepicker/dist/react-datepicker-cssmodules.css';
 
@@ -147,7 +150,7 @@ class SearchForm extends React.Component {
   render() {
     return (
       <div>
-        <Col xsOffset={4} xs={4}>
+        <Col xs={3}>
           <form>
             <FormGroup >
               <InputGroup>
@@ -385,6 +388,8 @@ class SearchForm extends React.Component {
                 )
             }
           </ListGroup>
+        </Col>
+        <Col xs={9}>
         </Col>
       </div>
     )
