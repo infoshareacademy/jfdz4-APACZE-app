@@ -30,8 +30,8 @@ const google = window.google;
 
 const DirectionsExampleGoogleMap = withGoogleMap(props => (
   <GoogleMap
-    defaultZoom={7}
-    defaultCenter={{ lat: -34.397, lng: 150.644 }}
+    defaultZoom={12}
+    defaultCenter={{ lat: 54.403182, lng: 18.570063 }}
   >
     {props.directions && <DirectionsRenderer directions={props.directions} />}
   </GoogleMap>
