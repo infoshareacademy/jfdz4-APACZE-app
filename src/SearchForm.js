@@ -26,6 +26,17 @@ const styles = {
   }
 }
 
+const google = window.google;
+
+const DirectionsExampleGoogleMap = withGoogleMap(props => (
+  <GoogleMap
+    defaultZoom={7}
+    defaultCenter={{ lat: -34.397, lng: 150.644 }}
+  >
+    {props.directions && <DirectionsRenderer directions={props.directions} />}
+  </GoogleMap>
+));
+
 class SearchForm extends React.Component {
   constructor(props) {
     super(props);
@@ -51,7 +62,10 @@ class SearchForm extends React.Component {
       chosenRoute: [],
       stopTimes: [],
       searchResults: [],
-      chosenTripDetails: []
+      chosenTripDetails: [],
+      origin: null,
+      destination: null,
+      directions: null
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -81,6 +95,24 @@ class SearchForm extends React.Component {
         })
       )
     )
+  }
+
+  setMap() {
+    const DirectionsService = new google.maps.DirectionsService();
+
+    DirectionsService.route({
+      origin: this.state.origin,
+      destination: this.state.destination,
+      travelMode: google.maps.TravelMode.DRIVING,
+    }, (result, status) => {
+      if (status === google.maps.DirectionsStatus.OK) {
+        this.setState({
+          directions: result,
+        });
+      } else {
+        console.error(`error fetching directions ${result}`);
+      }
+    });
   }
 
   handleStopsInTrips = () => {
@@ -193,7 +225,9 @@ class SearchForm extends React.Component {
                               ...this.state,
                               startBusStopId: busStop.stopId,
                               startBusStopName: busStop.stopDesc,
-                              showStartBusStopList: false
+                              showStartBusStopList: false,
+                              startBusStopLatitude: busStop.stopLat,
+                              startBusStopLongtitude: busStop.stopLon
                             })
                           }
                           }
@@ -246,7 +280,9 @@ class SearchForm extends React.Component {
                               ...this.state,
                               endBusStopId: busStop.stopId,
                               endBusStopName: busStop.stopDesc,
-                              showEndBusStopList: false
+                              showEndBusStopList: false,
+                              endBusStopLatitude: busStop.stopLat,
+                              endBusStopLongtitude: busStop.stopLon
                             })
                           }
                           }
@@ -353,16 +389,11 @@ class SearchForm extends React.Component {
                         this.setState({
                           ...this.state,
                           showTripDetails: true,
-                          chosenTripDetails: number.nextStops
-                        })
+                          chosenTripDetails: number.nextStops,
+                          origin: new google.maps.LatLng(this.state.startBusStopLatitude, this.state.startBusStopLongtitude),
+                          destination: new google.maps.LatLng(this.state.endBusStopLatitude, this.state.endBusStopLongtitude)
+                        }, this.setMap)
                       }}
-                      onBlur={() => {
-                        this.setState({
-                          ...this.state,
-                          showTrips: false
-                        })
-                      }
-                      }
                     >
                       {this.state.chosenRoute + " " + moment(number.departure).format("HH:mm:ss")}
                       <ul
@@ -390,6 +421,16 @@ class SearchForm extends React.Component {
           </ListGroup>
         </Col>
         <Col xs={9}>
+          <DirectionsExampleGoogleMap
+            containerElement={
+              <div style={{ height: `100%` }} />
+            }
+            mapElement={
+              <div style={{ height: `100vh` }} />
+            }
+            center={this.state.origin}
+            directions={this.state.directions}
+          />
         </Col>
       </div>
     )
