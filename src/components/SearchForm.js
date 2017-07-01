@@ -58,7 +58,6 @@ class SearchForm extends React.Component {
       endBusStopLatitude: '',
       endBusStopLongtitude: '',
       date: moment(),
-      time: "2017-07-02T12:40:00",
       startEnd: '',
       connections: [],
       chosenRoute: [],
@@ -297,7 +296,11 @@ class SearchForm extends React.Component {
               </ListGroup>
             </FormGroup>
           </form>
-          <p>Data</p>
+          <p>Data
+            <span >xxx</span>
+            {this.state.date.format("DD-MM-YYYY")}
+            <span>xxx</span>
+            </p>
           <DatePicker
             locale="pl-pl"
             selected={this.state.date}
