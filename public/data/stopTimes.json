@@ -1,0 +1,44 @@
+{
+  "110": [
+    {
+      "departure": "2017-07-02T12:43:00",
+      "nextStops": ["Galeria Bałtycka 12:46:00","Zabytkowa 12:48:00","Srebrzysko 12:49:00"]
+    },
+    {
+      "departure": "2017-07-02T13:13:00",
+      "nextStops": ["Galeria Bałtycka 13:16:00","Zabytkowa 13:18:00","Srebrzysko 13:19:00"]
+    },
+    {
+      "departure": "2017-07-02T13:43:00",
+      "nextStops": ["Galeria Bałtycka 13:46:00","Zabytkowa 13:48:00","Srebrzysko 13:49:00"]
+    }
+  ],
+  "126": [
+    {
+      "departure": "2017-07-02T13:28:00",
+      "nextStops": ["Galeria Bałtycka 13:31:00","Zabytkowa 13:33:00","Srebrzysko 13:34:00"]
+    },
+    {
+      "departure": "2017-07-02T14:28:00",
+      "nextStops": ["Galeria Bałtycka 14:31:00","Zabytkowa 14:33:00","Srebrzysko 14:34:00"]
+    },
+    {
+      "departure": "2017-07-02T15:28:00",
+      "nextStops": ["Galeria Bałtycka 15:31:00","Zabytkowa 15:33:00","Srebrzysko 15:34:00"]
+    }
+  ],
+  "157": [
+    {
+      "departure": "2017-07-02T12:58:00",
+      "nextStops": ["Galeria Bałtycka 13:01:00","Zabytkowa 13:03:00","Srebrzysko 13:04:00"]
+    },
+    {
+      "departure": "2017-07-02T13:58:00",
+      "nextStops": ["Galeria Bałtycka 14:01:00","Zabytkowa 14:03:00","Srebrzysko 14:04:00"]
+    },
+    {
+      "departure": "2017-07-02T14:58:00",
+      "nextStops": ["Galeria Bałtycka 15:01:00","Zabytkowa 15:03:00","Srebrzysko 15:04:00"]
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+[
+  {
+    "id":"001",
+    "name":"Derdowskiego",
+    "latitude":"54.405191",
+    "longtitude":"18.563948",
+    "lines": ["6","11","12"],
+    "schedule": [
+      {"line":"11","trackId":"11001","time":"14:14","vehicle":"tram"}
+    ]
+  },
+  {
+    "id":"002",
+    "name":"Tetmajera",
+    "latitude":"54.401873",
+    "longtitude":"18.566426",
+    "lines": ["6","11","12"],
+    "schedule": [
+      {"line":"11","trackId":"11001","time":"14:15","vehicle":"tram"}
+    ]
+  },
+  {
+    "id":"003",
+    "name":"Bażyńskiego",
+    "latitude":"54.399421",
+    "longtitude":"18.568254",
+    "lines": ["6","11","12"],
+    "schedule": [
+      {"line":"11","trackId":"11001","time":"14:16","vehicle":"tram"}
+    ]
+  },
+  {
+    "id":"004",
+    "name":"Uniwersytet",
+    "latitude":"54.395721",
+    "longtitude":"18.571894",
+    "lines": ["6","11","12"],
+    "schedule": [
+      {"line":"11","trackId":"11001","time":"14:17","vehicle":"tram"}
+    ]
+  },
+  {
+    "id":"005",
+    "name":"Strzyża PKM",
+    "latitude":"54.391026",
+    "longtitude":"18.578051",
+    "lines": ["6","11","12"],
+    "schedule": [
+      {"line":"11","trackId":"11001","time":"14:18","vehicle":"tram"}
+    ]
+  },
+  {
+    "id":"006",
+    "name":"Zajezdnia",
+    "latitude":"54.388421",
+    "longtitude":"18.581822",
+    "lines": ["6","11","12"],
+    "schedule": [
+      {"line":"11","trackId":"11001","time":"14:19","vehicle":"tram"}
+    ]
+  },
+  {
+    "id":"007",
+    "name":"Zamenhofa",
+    "latitude":"54.386979",
+    "longtitude":"18.584938",
+    "lines": ["6","11","12"],
+    "schedule": [
+      {"line":"11","trackId":"11001","time":"14:20","vehicle":"tram"}
+    ]
+  },
+  {
+    "id":"008",
+    "name":"Wojska Polskiego",
+    "latitude":"54.387142",
+    "longtitude":"18.590579",
+    "lines": ["6","11","12"],
+    "schedule": [
+      {"line":"11","trackId":"11001","time":"14:21","vehicle":"tram"}
+    ]
+  },
+  {
+    "id":"009",
+    "name":"Galeria Bałtycka",
+    "latitude":"54.382207",
+    "longtitude":"18.599219",
+    "lines": ["6","11","12"],
+    "schedule": [
+      {"line":"11","trackId":"11001","time":"14:22","vehicle":"tram"}
+    ]
+  },
+  {
+    "id":"010",
+    "name":"Klonowa",
+    "latitude":"54.379990",
+    "longtitude":"18.603141",
+    "lines": ["6","11","12"],
+    "schedule": [
+      {"line":"11","trackId":"11001","time":"14:23","vehicle":"tram"}
+    ]
+  }
+]
