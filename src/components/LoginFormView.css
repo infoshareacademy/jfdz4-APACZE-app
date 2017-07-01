@@ -10,10 +10,11 @@
     border-bottom: 3px #B54328 solid;
 }
 
-.login-google-button.btn.btn-default {
+button.login-google-button.btn.btn-default {
     display: block;
     margin: 0 auto;
-    background-color: #B54328;
+    color: white;
+    background-image: linear-gradient(to bottom, #FFFFFF 0%, #B54328 100%);
 }
 
 .login-form-or {
@@ -24,9 +25,12 @@
     margin-bottom: 10px;
 }
 
-.login-btn-primary.btn.btn-default {
+button.login-btn-primary.btn.btn-default {
     background-color: #B54328;
     margin-right: 10px;
+    color: white;
+    background-image: none;
+    background-color: #B54328;
 }
 
 
