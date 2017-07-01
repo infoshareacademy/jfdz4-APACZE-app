@@ -296,55 +296,62 @@ class SearchForm extends React.Component {
               </ListGroup>
             </FormGroup>
           </form>
-          <p>Data
-            <span >xxx</span>
+          <p className="date">
+            <input type="image" src="\img\iconmonstr-arrow-26-32-left.png" alt="Left"
+                   onClick={() => {
+                     this.setState({
+                       ...this.state,
+                       date: this.state.date.add(-1, "d")
+                     })
+                   }}/>
             {this.state.date.format("DD-MM-YYYY")}
-            <span>xxx</span>
-            </p>
-          <DatePicker
-            locale="pl-pl"
-            selected={this.state.date}
-            onChange={this.handleChange}
-          />
-          <p>Godzina</p>
-          <ButtonToolbar>
-            <Button onClick={() => {
-              this.setState({
-                ...this.state,
-                date: this.state.date.add(1, "h")
-              })
-            }}>
-              HH &uarr;
-            </Button>
-            <Button onClick={() => {
-              this.setState({
-                ...this.state,
-                date: this.state.date.add(1, "m")
-              })
-            }}>
-              mm &uarr;
-            </Button>
-          </ButtonToolbar>
-          <p>{this.state.date.format("HH:mm")}</p>
-          <ButtonToolbar>
-            <Button onClick={() => {
-              this.setState({
-                ...this.state,
-                date: this.state.date.add(-1, "h")
-              })
-            }}>
-              HH &darr;
-            </Button>
-            <Button onClick={() => {
-              this.setState({
-                ...this.state,
-                date: this.state.date.add(-1, "m")
-              })
-            }}>
-              mm &darr;
-            </Button>
-          </ButtonToolbar>
-
+            <input type="image" src="\img\iconmonstr-arrow-26-32-right.png" alt="Right"
+                   onClick={() => {
+                     this.setState({
+                       ...this.state,
+                       date: this.state.date.add(1, "d")
+                     })
+                   }}/>
+          </p>
+          <div className="time">
+            <div>
+              <input type="image" src="\img\iconmonstr-arrow-26-32-up.png" alt="Up"
+                     onClick={() => {
+                       this.setState({
+                         ...this.state,
+                         date: this.state.date.add(-1, "h")
+                       })
+                     }}/>
+              <br/>
+              <input type="image" src="\img\iconmonstr-arrow-26-32-down.png" alt="Down"
+                     onClick={() => {
+                       this.setState({
+                         ...this.state,
+                         date: this.state.date.add(1, "h")
+                       })
+                     }}/>
+            </div>
+            <div>
+              <p>{this.state.date.format("HH:mm")}</p>
+            </div>
+            <div>
+              <input type="image" src="\img\iconmonstr-arrow-26-32-up.png" alt="Up"
+                     onClick={() => {
+                       this.setState({
+                         ...this.state,
+                         date: this.state.date.add(-1, "m")
+                       })
+                     }}/>
+              <br/>
+              <input type="image" src="\img\iconmonstr-arrow-26-32-down.png" alt="Down"
+                     onClick={() => {
+                       this.setState({
+                         ...this.state,
+                         date: this.state.date.add(1, "m")
+                       })
+                     }}/>
+            </div>
+          </div>
           <Button
             type="submit"
             onClick={this.handleStopsInTrips}

@@ -13,3 +13,23 @@
   position: absolute;
   z-index: 3;
 }
+
+.date {
+  font-size: 40px;
+  color: #fff;
+}
+
+.time {
+  overflow: hidden;
+}
+
+.time div {
+  float: left;
+  margin: 0 10px
+}
+
+.time div p {
+  font-size: 40px;
+  color: #fff;
+  margin: 0 10px;
+}
