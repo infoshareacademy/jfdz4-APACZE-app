@@ -4,20 +4,16 @@ import {
   FormControl,
   Col,
   Button,
-  ButtonToolbar,
   InputGroup,
   ListGroup,
   ListGroupItem
 } from 'react-bootstrap'
-import DatePicker from 'react-datepicker'
 import moment from 'moment'
 import {
   withGoogleMap,
   GoogleMap,
   DirectionsRenderer
 } from 'react-google-maps'
-
-import 'react-datepicker/dist/react-datepicker-cssmodules.css'
 
 import './SearchForm.css'
 
@@ -408,24 +404,7 @@ class SearchForm extends React.Component {
                       }}
                     >
                       {this.state.chosenRoute + " " + moment(route.departure).format("HH:mm")}
-                      <ul
-                        style={
-                          this.state.showTripDetails === false ?
-                            styles.hidden :
-                            styles.base
-                        }
-                      >{
-                        this.state.chosenTripDetails === null ?
-                          'No bus stops' : this.state.chosenTripDetails.map((routeStops, index) => (
-                              <li
-                                key={index}
-                              >
-                                {routeStops}
-                              </li>
-                            )
-                          )
-                      }
-                      </ul>
+
                     </ListGroupItem>
                   )
                 )
