@@ -1,7 +1,8 @@
 import React from 'react'
-import {Form, FormGroup, FormControl, Col, ControlLabel, Button} from 'react-bootstrap'
+import {Form, FormGroup, FormControl, Col, Button} from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import firebase from 'firebase'
+import './LoginFormView.css'
 
 export default class LoginForm extends React.Component {
 
@@ -88,40 +89,35 @@ export default class LoginForm extends React.Component {
         <Form horizontal
               onSubmit={this.handleSubmit}
         >
+
+          <div className="login-controls-wrapper">
+
+          <Button onClick={this.handleGoogleLogIn} className="login-google-button">
+            Zaloguj przez Google
+          </Button>
+          <p className="login-form-or">- lub -</p>
           <FormGroup controlId="formHorizontalEmail">
-            <Col componentClass={ControlLabel} smOffset={1} xs={2}>
-              E-mail
-            </Col>
+            <Col smOffset={1} xs={2}/>
             <Col xs={8} sm={7}>
               <FormControl type="email" placeholder="E-mail" name="email"
-               value={this.state.email} onChange={this.handleChange} autoComplete="email"/>
+               value={this.state.email} onChange={this.handleChange} autoComplete="email"
+               className="login-form-control"/>
             </Col>
           </FormGroup>
 
           <FormGroup controlId="formHorizontalPassword">
-            <Col componentClass={ControlLabel} smOffset={1} xs={2}>
-              Hasło
-            </Col>
+            <Col smOffset={1} xs={2}/>
             <Col xs={8} sm={7}>
               <FormControl type="password" placeholder="Hasło" name="password"
-               value={this.state.password} onChange={this.handleChange} autoComplete="new-password"/>
+               value={this.state.password} onChange={this.handleChange} autoComplete="new-password"
+               className="login-form-control"/>
             </Col>
           </FormGroup>
 
           <FormGroup>
             <Col xsOffset={2} smOffset={3} xs={8}>
-              <Button type="submit" className="btn btn-primary">
-
+              <Button type="submit" className="login-btn login-btn-primary">
                 Zaloguj
-
-              </Button>
-              <Button onClick={this.handleGoogleLogIn}>
-                 Zaloguj przez konto Google
-              </Button>
-              <Button type="submit">
-                <Link to={'/search'}>
-                  Wyszukaj
-                </Link>
               </Button>
               <Button type="submit">
                 <Link to={'/register'}>
@@ -129,24 +125,17 @@ export default class LoginForm extends React.Component {
                 </Link>
               </Button>
 
-
-              {
-                this.state.user === null ?
-                  null
-                  :
-                  this.state.user.email === 'aniahb@gmail.com' ?
-                    <Button type="submit">
-                      <Link to={'/users'}>
-                        Użytkownicy
-                      </Link>
-                    </Button>
-                    :
-                    null
-               }              
-
+              <Button type="submit">
+                <Link to={'/search'}>
+                  Wyszukaj
+                </Link>
+              </Button>
             </Col>
           </FormGroup>
+
+          </div>
         </Form>
+
       </div>
     )
   }

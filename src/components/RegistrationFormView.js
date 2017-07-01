@@ -128,16 +128,14 @@ export default class RegistrationForm extends React.Component {
         
         <FormGroup>
           <Col xsOffset={2} smOffset={3} xs={8}>
-            <div>
-              <Button type="submit" className="btn btn-primary">
-                Zarejestruj
-              </Button>
-              <Button style={ {marginLeft: '10px'} }>
-                <Link to={'/'}>
-                  Powrót do logowania
-                </Link>
-              </Button>
-            </div>
+            <Button type="submit" className="login-btn login-btn-primary">
+              Zarejestruj
+            </Button>
+            <Button>
+              <Link to={'/'}>
+                Powrót do logowania
+              </Link>
+            </Button>
           </Col>
         </FormGroup>
       </Form>
