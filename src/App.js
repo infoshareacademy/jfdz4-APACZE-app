@@ -3,7 +3,7 @@ import { Col, Row } from 'react-bootstrap'
 import firebase from 'firebase'
 
 import LoginForm from './components/LoginFormView'
-import SearchForm from './SearchForm'
+import SearchForm from './components/SearchForm'
 import MenuForm from './components/MenuFormView'
 
 export default class App extends React.Component {
