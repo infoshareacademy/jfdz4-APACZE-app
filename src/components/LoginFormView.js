@@ -124,12 +124,6 @@ export default class LoginForm extends React.Component {
                     Zarejestruj
                   </Link>
                 </Button>
-
-                <Button type="submit">
-                  <Link to={'/search'}>
-                    Wyszukaj
-                  </Link>
-                </Button>
               </Col>
             </FormGroup>
 
