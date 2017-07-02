@@ -4,6 +4,8 @@ import Menu, {MenuItem} from 'rc-menu'
 import 'rc-menu/assets/index.css'
 import {Link} from 'react-router-dom'
 
+import './MenuFormView.css'
+
 export default class MenuForm extends React.Component {
 
   state = {
@@ -40,9 +42,6 @@ export default class MenuForm extends React.Component {
     <Menu
       mode="horizontal"
       onClick={this.handleClick}>
-      <MenuItem key="1"><Link to={'/register'}>
-        Zarejestruj
-      </Link></MenuItem>
       <MenuItem key="2">
         Wyloguj
       </MenuItem>

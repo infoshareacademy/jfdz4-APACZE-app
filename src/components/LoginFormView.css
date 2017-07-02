@@ -23,6 +23,7 @@ button.login-google-button.btn.btn-default {
     text-align: center;
     margin-top: 10px;
     margin-bottom: 10px;
+    color: white;
 }
 
 button.login-btn-primary.btn.btn-default {
