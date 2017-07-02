@@ -119,11 +119,6 @@ export default class LoginForm extends React.Component {
                  Zaloguj przez konto Google
               </Button>
               <Button type="submit">
-                <Link to={'/search'}>
-                  Wyszukaj
-                </Link>
-              </Button>
-              <Button type="submit">
                 <Link to={'/register'}>
                   Zarejestruj
                 </Link>
