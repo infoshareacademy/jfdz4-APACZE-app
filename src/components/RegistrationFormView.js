@@ -2,11 +2,12 @@ import React from 'react'
 import {Form, FormGroup, FormControl, Col, ControlLabel, Button} from 'react-bootstrap'
 import {Link} from 'react-router-dom'
 import firebase from 'firebase'
+import './RegistrationForm.css'
 
-// const svgCaptcha = require('svg-captcha');
-//
-// const captcha = svgCaptcha.create();
-// console.log(captcha);
+// Generate a simple captcha
+ const randomNumber = (min, max) => {
+  return Math.floor(Math.random() * (max - min) + min);
+};
 
 export default class RegistrationForm extends React.Component {
 
@@ -15,6 +16,9 @@ export default class RegistrationForm extends React.Component {
     this.state = {
       email: '',
       password: '',
+      a: randomNumber(1,20),
+      b: randomNumber(1,20),
+      sum: 0
     }
   }
 
@@ -36,6 +40,15 @@ export default class RegistrationForm extends React.Component {
       return;
     }
 
+    let a = this.state.a
+    let b = this.state.b
+    let sum = parseInt(this.state.sum,10)
+    
+    if ( (a + b) !== sum ) {
+      alert('Niepoprawna suma liczb');
+      return;
+    }
+    
     //tutaj zapis w firebase
     firebase.auth().createUserWithEmailAndPassword(this.state.email, this.state.password)
       .then(
@@ -58,15 +71,21 @@ export default class RegistrationForm extends React.Component {
       name: '',
       email: '',
       password: ''
+      // a: 0,
+      // b: 0,
+      // sum: 0
     });
+
   };
 
+  
   render() {
 
     return (
       <Form horizontal
         onSubmit={this.handleSubmit}
         onError={(errors, data) => console.log('error', errors, data)}
+        className="regForm"
       >
 
         <FormGroup>
@@ -98,8 +117,18 @@ export default class RegistrationForm extends React.Component {
         </FormGroup>
 
         <FormGroup>
+          <Col componentClass={ControlLabel} smOffset={1} xs={2}>
+            {this.state.a} + {this.state.b} =
+          </Col>
+          <Col xs={8} sm={7}>
+            <FormControl type="number" placeholder="Wprowadź sumę liczb"
+                         name='sum' onChange={this.handleChange} autoComplete="new-sum"/>
+          </Col>
+        </FormGroup>
+        
+        <FormGroup>
           <Col xsOffset={2} smOffset={3} xs={8}>
-            <Button type="submit" className="btn btn-primary">
+            <Button type="submit" className="login-btn login-btn-primary">
               Zarejestruj
             </Button>
             <Button>

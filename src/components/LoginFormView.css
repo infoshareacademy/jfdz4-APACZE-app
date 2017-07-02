@@ -1,0 +1,37 @@
+.login-controls-wrapper {
+    margin: 50px;
+}
+
+.login-form-control {
+    display: block;
+    margin: 0 auto;
+    width: 100%;
+    border: 0;
+    border-bottom: 3px #B54328 solid;
+}
+
+button.login-google-button.btn.btn-default {
+    display: block;
+    margin: 0 auto;
+    color: white;
+    background-image: linear-gradient(to bottom, #FFFFFF 0%, #B54328 100%);
+}
+
+.login-form-or {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+button.login-btn-primary.btn.btn-default {
+    background-color: #B54328;
+    margin-right: 10px;
+    color: white;
+    background-image: none;
+    background-color: #B54328;
+}
+
+
+

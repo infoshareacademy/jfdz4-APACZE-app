@@ -11,7 +11,7 @@ import 'bootstrap/dist/css/bootstrap-theme.css'
 
 import store from './store'
 import App from './App';
-import SearchForm from './SearchForm'
+import SearchForm from './components/SearchForm'
 import RegistrationForm from './components/RegistrationFormView'
 import Users from './components/Users'
 
