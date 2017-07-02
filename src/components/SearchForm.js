@@ -35,6 +35,33 @@ const DirectionsExampleGoogleMap = withGoogleMap(props => (
   </GoogleMap>
 ));
 
+const initialState = {
+  showStartBusStopList: false,
+  showEndBusStopList: false,
+  showConnections: false,
+  showTrips: false,
+  showTripDetails: false,
+  busStops: null,
+  startBusStopId: '',
+  startBusStopName: '',
+  startBusStopLatitude: '',
+  startBusStopLongtitude: '',
+  endBusStopId: '',
+  endBusStopName: '',
+  endBusStopLatitude: '',
+  endBusStopLongtitude: '',
+  date: moment(),
+  startEnd: '',
+  connections: [],
+  chosenRoute: [],
+  stopTimes: [],
+  searchResults: [],
+  chosenTripDetails: [],
+  origin: null,
+  destination: null,
+  directions: null
+};
+
 class SearchForm extends React.Component {
   constructor(props) {
     super(props);
@@ -353,6 +380,14 @@ class SearchForm extends React.Component {
             onClick={this.handleStopsInTrips}
           >
             Szukaj połączenia
+          </Button>
+          <Button
+            type="submit"
+            onClick={() => {
+            this.setState(initialState)
+            }}
+          >
+            Wyczyść
           </Button>
           <ListGroup
             style={
