@@ -33,7 +33,7 @@ export default class App extends React.Component {
         <div>
           <Row>
           <Col smOffset={1} xs={2}></Col>
-          <Col xs={8} sm={7}>
+          <Col xs={12}>
             {
               this.state.user === null ?
                 <LoginForm/>
