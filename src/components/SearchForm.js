@@ -4,17 +4,18 @@ import {
   FormControl,
   Col,
   Button,
-  ButtonToolbar,
   InputGroup,
-  Radio,
   ListGroup,
   ListGroupItem
 } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
-import DatePicker from 'react-datepicker'
 import moment from 'moment'
+import {
+  withGoogleMap,
+  GoogleMap,
+  DirectionsRenderer
+} from 'react-google-maps'
 
-import 'react-datepicker/dist/react-datepicker-cssmodules.css';
+import './SearchForm.css'
 
 const styles = {
   base: {},
@@ -22,6 +23,17 @@ const styles = {
     display: 'none'
   }
 }
+
+const google = window.google;
+
+const DirectionsExampleGoogleMap = withGoogleMap(props => (
+  <GoogleMap
+    defaultZoom={12}
+    defaultCenter={{ lat: 54.403182, lng: 18.570063 }}
+  >
+    {props.directions && <DirectionsRenderer directions={props.directions} />}
+  </GoogleMap>
+));
 
 class SearchForm extends React.Component {
   constructor(props) {
@@ -42,13 +54,15 @@ class SearchForm extends React.Component {
       endBusStopLatitude: '',
       endBusStopLongtitude: '',
       date: moment(),
-      time: "2017-07-02T12:40:00",
       startEnd: '',
       connections: [],
       chosenRoute: [],
       stopTimes: [],
       searchResults: [],
-      chosenTripDetails: []
+      chosenTripDetails: [],
+      origin: null,
+      destination: null,
+      directions: null
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -78,6 +92,24 @@ class SearchForm extends React.Component {
         })
       )
     )
+  }
+
+  setMap() {
+    const DirectionsService = new google.maps.DirectionsService();
+
+    DirectionsService.route({
+      origin: this.state.origin,
+      destination: this.state.destination,
+      travelMode: google.maps.TravelMode.DRIVING,
+    }, (result, status) => {
+      if (status === google.maps.DirectionsStatus.OK) {
+        this.setState({
+          directions: result,
+        });
+      } else {
+        console.error(`error fetching directions ${result}`);
+      }
+    });
   }
 
   handleStopsInTrips = () => {
@@ -147,7 +179,7 @@ class SearchForm extends React.Component {
   render() {
     return (
       <div>
-        <Col xsOffset={4} xs={4}>
+        <Col xs={3}>
           <form>
             <FormGroup >
               <InputGroup>
@@ -190,7 +222,9 @@ class SearchForm extends React.Component {
                               ...this.state,
                               startBusStopId: busStop.stopId,
                               startBusStopName: busStop.stopDesc,
-                              showStartBusStopList: false
+                              showStartBusStopList: false,
+                              startBusStopLatitude: busStop.stopLat,
+                              startBusStopLongtitude: busStop.stopLon
                             })
                           }
                           }
@@ -243,7 +277,9 @@ class SearchForm extends React.Component {
                               ...this.state,
                               endBusStopId: busStop.stopId,
                               endBusStopName: busStop.stopDesc,
-                              showEndBusStopList: false
+                              showEndBusStopList: false,
+                              endBusStopLatitude: busStop.stopLat,
+                              endBusStopLongtitude: busStop.stopLon
                             })
                           }
                           }
@@ -256,51 +292,62 @@ class SearchForm extends React.Component {
               </ListGroup>
             </FormGroup>
           </form>
-          <p>Data</p>
-          <DatePicker
-            locale="pl-pl"
-            selected={this.state.date}
-            onChange={this.handleChange}
-          />
-          <p>Godzina</p>
-          <ButtonToolbar>
-            <Button onClick={() => {
-              this.setState({
-                ...this.state,
-                date: this.state.date.add(1, "h")
-              })
-            }}>
-              HH &uarr;
-            </Button>
-            <Button onClick={() => {
-              this.setState({
-                ...this.state,
-                date: this.state.date.add(1, "m")
-              })
-            }}>
-              mm &uarr;
-            </Button>
-          </ButtonToolbar>
-          <p>{this.state.date.format("HH:mm")}</p>
-          <ButtonToolbar>
-            <Button onClick={() => {
-              this.setState({
-                ...this.state,
-                date: this.state.date.add(-1, "h")
-              })
-            }}>
-              HH &darr;
-            </Button>
-            <Button onClick={() => {
-              this.setState({
-                ...this.state,
-                date: this.state.date.add(-1, "m")
-              })
-            }}>
-              mm &darr;
-            </Button>
-          </ButtonToolbar>
-
+          <p className="date">
+            <input type="image" src="\img\iconmonstr-arrow-26-32-left.png" alt="Left"
+                   onClick={() => {
+                     this.setState({
+                       ...this.state,
+                       date: this.state.date.add(-1, "d")
+                     })
+                   }}/>
+            {this.state.date.format("DD-MM-YYYY")}
+            <input type="image" src="\img\iconmonstr-arrow-26-32-right.png" alt="Right"
+                   onClick={() => {
+                     this.setState({
+                       ...this.state,
+                       date: this.state.date.add(1, "d")
+                     })
+                   }}/>
+          </p>
+          <div className="time">
+            <div>
+              <input type="image" src="\img\iconmonstr-arrow-26-32-up.png" alt="Up"
+                     onClick={() => {
+                       this.setState({
+                         ...this.state,
+                         date: this.state.date.add(-1, "h")
+                       })
+                     }}/>
+              <br/>
+              <input type="image" src="\img\iconmonstr-arrow-26-32-down.png" alt="Down"
+                     onClick={() => {
+                       this.setState({
+                         ...this.state,
+                         date: this.state.date.add(1, "h")
+                       })
+                     }}/>
+            </div>
+            <div>
+              <p>{this.state.date.format("HH:mm")}</p>
+            </div>
+            <div>
+              <input type="image" src="\img\iconmonstr-arrow-26-32-up.png" alt="Up"
+                     onClick={() => {
+                       this.setState({
+                         ...this.state,
+                         date: this.state.date.add(-1, "m")
+                       })
+                     }}/>
+              <br/>
+              <input type="image" src="\img\iconmonstr-arrow-26-32-down.png" alt="Down"
+                     onClick={() => {
+                       this.setState({
+                         ...this.state,
+                         date: this.state.date.add(1, "m")
+                       })
+                     }}/>
+            </div>
+          </div>
           <Button
             type="submit"
             onClick={this.handleStopsInTrips}
@@ -316,19 +363,19 @@ class SearchForm extends React.Component {
           >
             {
               this.state.connections === null ?
-              'No bus stops' : this.state.connections.map((number, index) => (
+              'No bus stops' : this.state.connections.map((connection, index) => (
                     <ListGroupItem
                       key={index}
                       onClick={() => {
                         this.setState({
                           ...this.state,
-                          chosenRoute: number.routeId,
+                          chosenRoute: connection.routeId,
                           showConnections: false
                         }, this.handleSearchResults)
                       }
                       }
                     >
-                      {number.routeId}
+                      {connection.routeId}
                     </ListGroupItem>
                   )
                 )
@@ -343,48 +390,38 @@ class SearchForm extends React.Component {
           >
             {
               this.state.searchResults === null ?
-              'No bus stops' : this.state.searchResults.map((number, index) => (
+              'No bus stops' : this.state.searchResults.map((route, index) => (
                     <ListGroupItem
                       key={index}
                       onClick={() => {
                         this.setState({
                           ...this.state,
                           showTripDetails: true,
-                          chosenTripDetails: number.nextStops
-                        })
+                          chosenTripDetails: route.nextStops,
+                          origin: new google.maps.LatLng(this.state.startBusStopLatitude, this.state.startBusStopLongtitude),
+                          destination: new google.maps.LatLng(this.state.endBusStopLatitude, this.state.endBusStopLongtitude)
+                        }, this.setMap)
                       }}
-                      onBlur={() => {
-                        this.setState({
-                          ...this.state,
-                          showTrips: false
-                        })
-                      }
-                      }
                     >
-                      {this.state.chosenRoute + " " + moment(number.departure).format("HH:mm:ss")}
-                      <ul
-                        style={
-                          this.state.showTripDetails === false ?
-                            styles.hidden :
-                            styles.base
-                        }
-                      >{
-                        this.state.chosenTripDetails === null ?
-                          'No bus stops' : this.state.chosenTripDetails.map((number, index) => (
-                              <li
-                                key={index}
-                              >
-                                {number}
-                              </li>
-                            )
-                          )
-                      }
-                      </ul>
+                      {this.state.chosenRoute + " " + moment(route.departure).format("HH:mm")}
+
                     </ListGroupItem>
                   )
                 )
             }
           </ListGroup>
+        </Col>
+        <Col xs={9}>
+          <DirectionsExampleGoogleMap
+            containerElement={
+              <div style={{ height: `100%` }} />
+            }
+            mapElement={
+              <div style={{ height: `100vh` }} />
+            }
+            center={this.state.origin}
+            directions={this.state.directions}
+          />
         </Col>
       </div>
     )
