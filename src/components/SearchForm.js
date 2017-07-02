@@ -65,32 +65,7 @@ const initialState = {
 class SearchForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showStartBusStopList: false,
-      showEndBusStopList: false,
-      showConnections: false,
-      showTrips: false,
-      showTripDetails: false,
-      busStops: null,
-      startBusStopId: '',
-      startBusStopName: '',
-      startBusStopLatitude: '',
-      startBusStopLongtitude: '',
-      endBusStopId: '',
-      endBusStopName: '',
-      endBusStopLatitude: '',
-      endBusStopLongtitude: '',
-      date: moment(),
-      startEnd: '',
-      connections: [],
-      chosenRoute: [],
-      stopTimes: [],
-      searchResults: [],
-      chosenTripDetails: [],
-      origin: null,
-      destination: null,
-      directions: null
-    };
+    this.state = initialState
     this.handleChange = this.handleChange.bind(this);
   }
 
